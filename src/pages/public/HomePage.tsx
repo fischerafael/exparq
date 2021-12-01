@@ -2,12 +2,17 @@ import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 import { FaGoogle } from "react-icons/fa";
+import { useSession } from "../../contexts/useSession";
 import { handleGoogleLogIn } from "../../services/firebase";
 
 export const HomePage = () => {
+  const { sessionUserData } = useSession();
+
+  console.log(sessionUserData);
+
   const onLogin = async () => {
     const user = await handleGoogleLogIn();
-    console.log("USER", user);
+    // redirect to app
   };
 
   return (
