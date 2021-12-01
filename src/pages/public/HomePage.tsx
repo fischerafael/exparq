@@ -1,4 +1,5 @@
 import { Button } from "@chakra-ui/button";
+import { Image } from "@chakra-ui/image";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 import { FaGoogle } from "react-icons/fa";
 
@@ -12,8 +13,8 @@ export const HomePage = () => {
       color="gray.900"
     >
       <VStack w="full" maxW="lg" bg="white" px="8">
-        <Flex h="30vh" align="center">
-          <Text fontWeight="extrabold">Ux Arch</Text>
+        <Flex h="15vh" align="center">
+          <Image src="/logo-black.svg" alt="UXArch" />
         </Flex>
 
         <VStack h="70vh" spacing="8" justify="center">
@@ -33,7 +34,7 @@ export const HomePage = () => {
             size="lg"
             variant="solid"
           >
-            Projetar
+            Projetar usando Google
           </Button>
         </VStack>
       </VStack>
