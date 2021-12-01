@@ -2,8 +2,14 @@ import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 import { FaGoogle } from "react-icons/fa";
+import { handleGoogleLogIn } from "../../services/firebase";
 
 export const HomePage = () => {
+  const onLogin = async () => {
+    const user = await handleGoogleLogIn();
+    console.log("USER", user);
+  };
+
   return (
     <Flex
       w="100vw"
@@ -33,6 +39,7 @@ export const HomePage = () => {
             colorScheme="blue"
             size="lg"
             variant="solid"
+            onClick={onLogin}
           >
             Projetar usando Google
           </Button>
