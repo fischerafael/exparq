@@ -20,7 +20,7 @@ export const AppTemplate = ({ header, body }: Props) => {
           {header}
         </Flex>
 
-        <VStack h="85vh" w="full">
+        <VStack h="85vh" w="full" overflowY="auto">
           {body}
         </VStack>
       </VStack>

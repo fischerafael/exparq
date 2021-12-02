@@ -1,20 +1,14 @@
-import Router from "next/router";
-import { Image } from "@chakra-ui/image";
-import { Flex, HStack, Text, VStack } from "@chakra-ui/layout";
-import { Avatar } from "@chakra-ui/avatar";
-import { Button, Icon, IconButton } from "@chakra-ui/react";
-import { HiOutlineLogout } from "react-icons/hi";
-import { HiOutlineChevronRight } from "react-icons/hi";
+import { handleNavigate } from "../../utils/handleNavigate";
 import { useSession } from "../../contexts/useSession";
+import { Text, VStack } from "@chakra-ui/layout";
+import { Button } from "@chakra-ui/react";
+import { HiOutlineChevronRight } from "react-icons/hi";
+
 import { Header } from "../../components/organisms/Header";
 import { AppTemplate } from "../../components/templates/AppTemplate";
 
 export const AppPage = () => {
   const { sessionUserData } = useSession();
-
-  const onNavigate = (url: string) => {
-    Router.push(url);
-  };
 
   return (
     <AppTemplate
@@ -26,7 +20,6 @@ export const AppPage = () => {
           justify="center"
           align="flex-start"
           w="full"
-          overflowY="auto"
         >
           <Text textAlign="start" fontWeight="bold">
             Bem vindo, {sessionUserData.displayName}
@@ -55,7 +48,7 @@ export const AppPage = () => {
             w="full"
             rightIcon={<HiOutlineChevronRight />}
             py="8"
-            onClick={() => onNavigate("/app/references")}
+            onClick={() => handleNavigate("/app/references")}
           >
             Referências
           </Button>
