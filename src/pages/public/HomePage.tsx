@@ -6,13 +6,23 @@ import { useSession } from "../../contexts/useSession";
 import { handleGoogleLogIn } from "../../services/firebase";
 
 export const HomePage = () => {
-  const { sessionUserData } = useSession();
+  const { sessionUserData, setSessionUserData } = useSession();
 
   console.log(sessionUserData);
 
   const onLogin = async () => {
-    const user = await handleGoogleLogIn();
-    // redirect to app
+    try {
+      const { displayName, email, photoURL } = await handleGoogleLogIn();
+
+      if (!displayName || !email || !photoURL)
+        throw new Error("Missing Information");
+
+      setSessionUserData({ displayName, email, photoURL });
+
+      console.log(sessionUserData);
+    } catch (e) {
+      console.log("ERROR - onLogin", e);
+    }
   };
 
   return (
