@@ -1,4 +1,12 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import Cookie from "js-cookie";
+import Router from "next/router";
 
 interface ISessionUserData {
   displayName: string;
@@ -19,6 +27,19 @@ const SessionProvider = ({ children }: { children: ReactNode }) => {
     email: "",
     photoURL: "",
   });
+
+  useEffect(() => {
+    const cookies = Cookie.get("@ux");
+
+    if (!cookies) {
+      Router.push("/");
+      return;
+    }
+
+    const parsedCookies = JSON.parse(cookies);
+    setSessionUserData(parsedCookies);
+    Router.push("/app");
+  }, []);
 
   return (
     <SessionContext.Provider value={{ sessionUserData, setSessionUserData }}>
