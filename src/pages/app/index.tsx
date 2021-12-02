@@ -1,13 +1,10 @@
+import Router from "next/router";
 import { Image } from "@chakra-ui/image";
 import { Flex, HStack, Text, VStack } from "@chakra-ui/layout";
 import { Avatar } from "@chakra-ui/avatar";
 import { Button, Icon, IconButton } from "@chakra-ui/react";
 import { HiOutlineLogout } from "react-icons/hi";
-import {
-  HiChevronRight,
-  HiOutlineChevronRight,
-  HiOutlineHome,
-} from "react-icons/hi";
+import { HiOutlineChevronRight } from "react-icons/hi";
 import { useSession } from "../../contexts/useSession";
 
 export const AppPage = () => {
@@ -15,6 +12,10 @@ export const AppPage = () => {
 
   const onLogout = () => {
     handleLogout();
+  };
+
+  const onNavigate = (url: string) => {
+    Router.push(url);
   };
 
   return (
@@ -85,6 +86,7 @@ export const AppPage = () => {
             w="full"
             rightIcon={<HiOutlineChevronRight />}
             py="8"
+            onClick={() => onNavigate("/app/references")}
           >
             Referências
           </Button>
