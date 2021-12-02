@@ -6,8 +6,15 @@ import {
   HiOutlineChevronRight,
   HiOutlineHome,
 } from "react-icons/hi";
+import { useSession } from "../../contexts/useSession";
 
 export const AppPage = () => {
+  const { handleLogout } = useSession();
+
+  const onLogout = () => {
+    handleLogout();
+  };
+
   return (
     <Flex
       w="100vw"
@@ -24,6 +31,7 @@ export const AppPage = () => {
             colorScheme="blue"
             size="lg"
             variant="ghost"
+            onClick={onLogout}
           >
             Sair
           </Button>

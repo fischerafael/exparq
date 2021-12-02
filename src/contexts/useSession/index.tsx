@@ -19,6 +19,7 @@ interface ISessionContextProps {
   sessionUserData: ISessionUserData;
   setSessionUserData: (data: ISessionUserData) => void;
   handleLogin: () => Promise<void>;
+  handleLogout: () => void;
 }
 
 const SessionContext = createContext({} as ISessionContextProps);
@@ -60,9 +61,15 @@ const SessionProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const handleLogout = () => {
+    Cookie.remove("@ux");
+    setSessionUserData({ displayName: "", email: "", photoURL: "" });
+    Router.push("/");
+  };
+
   return (
     <SessionContext.Provider
-      value={{ sessionUserData, setSessionUserData, handleLogin }}
+      value={{ sessionUserData, setSessionUserData, handleLogin, handleLogout }}
     >
       {children}
     </SessionContext.Provider>
