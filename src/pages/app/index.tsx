@@ -1,6 +1,8 @@
 import { Image } from "@chakra-ui/image";
-import { Flex, Text, VStack } from "@chakra-ui/layout";
-import { Button, Icon } from "@chakra-ui/react";
+import { Flex, HStack, Text, VStack } from "@chakra-ui/layout";
+import { Avatar } from "@chakra-ui/avatar";
+import { Button, Icon, IconButton } from "@chakra-ui/react";
+import { HiOutlineLogout } from "react-icons/hi";
 import {
   HiChevronRight,
   HiOutlineChevronRight,
@@ -9,7 +11,7 @@ import {
 import { useSession } from "../../contexts/useSession";
 
 export const AppPage = () => {
-  const { handleLogout } = useSession();
+  const { handleLogout, sessionUserData } = useSession();
 
   const onLogout = () => {
     handleLogout();
@@ -26,15 +28,27 @@ export const AppPage = () => {
       <VStack w="full" maxW="lg" bg="white" px="8">
         <Flex h="15vh" justify="space-between" w="full" align="center">
           <Image src="/logo-black.svg" alt="UXArch" />
-          <Button
-            borderRadius="sm"
-            colorScheme="blue"
-            size="lg"
-            variant="ghost"
-            onClick={onLogout}
-          >
-            Sair
-          </Button>
+          <HStack spacing="4">
+            <Avatar
+              name={sessionUserData.displayName}
+              src={sessionUserData.photoURL}
+              bg="blue.500"
+              color="white"
+              size="sm"
+            />
+
+            <IconButton
+              aria-label="Logout"
+              icon={<HiOutlineLogout />}
+              borderRadius="sm"
+              colorScheme="blue"
+              size="lg"
+              variant="ghost"
+              onClick={onLogout}
+            >
+              Sair
+            </IconButton>
+          </HStack>
         </Flex>
 
         <VStack
@@ -45,7 +59,7 @@ export const AppPage = () => {
           w="full"
         >
           <Text textAlign="start" fontWeight="bold">
-            Bem vindo, Rafael
+            Bem vindo, {sessionUserData.displayName}
           </Text>
 
           <Text textAlign="start">
