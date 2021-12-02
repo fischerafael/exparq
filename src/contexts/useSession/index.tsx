@@ -7,6 +7,7 @@ import {
 } from "react";
 import Cookie from "js-cookie";
 import Router from "next/router";
+import { handleGoogleLogIn } from "../../services/firebase";
 
 interface ISessionUserData {
   displayName: string;
@@ -17,6 +18,7 @@ interface ISessionUserData {
 interface ISessionContextProps {
   sessionUserData: ISessionUserData;
   setSessionUserData: (data: ISessionUserData) => void;
+  handleLogin: () => Promise<void>;
 }
 
 const SessionContext = createContext({} as ISessionContextProps);
@@ -41,8 +43,27 @@ const SessionProvider = ({ children }: { children: ReactNode }) => {
     Router.push("/app");
   }, []);
 
+  const handleLogin = async () => {
+    try {
+      const { displayName, email, photoURL } = await handleGoogleLogIn();
+
+      if (!displayName || !email || !photoURL)
+        throw new Error("Missing Information");
+
+      const userData = { displayName, email, photoURL };
+
+      setSessionUserData(userData);
+      Cookie.set("@ux", JSON.stringify(userData));
+      Router.push("/app");
+    } catch (e: any) {
+      throw new Error("Unable to login with Google");
+    }
+  };
+
   return (
-    <SessionContext.Provider value={{ sessionUserData, setSessionUserData }}>
+    <SessionContext.Provider
+      value={{ sessionUserData, setSessionUserData, handleLogin }}
+    >
       {children}
     </SessionContext.Provider>
   );

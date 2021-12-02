@@ -1,30 +1,20 @@
-import Cookie from "js-cookie";
-import Router from "next/router";
+import { useSession } from "../../contexts/useSession";
+import { FaGoogle } from "react-icons/fa";
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
-import { FaGoogle } from "react-icons/fa";
-import { useSession } from "../../contexts/useSession";
-import { handleGoogleLogIn } from "../../services/firebase";
 
 export const HomePage = () => {
-  const { sessionUserData, setSessionUserData } = useSession();
+  const { handleLogin } = useSession();
 
-  const onLogin = async () => {
-    try {
-      const { displayName, email, photoURL } = await handleGoogleLogIn();
-
-      if (!displayName || !email || !photoURL)
-        throw new Error("Missing Information");
-
-      const userData = { displayName, email, photoURL };
-
-      setSessionUserData(userData);
-      Cookie.set("@ux", JSON.stringify(userData));
-      Router.push("/app");
-    } catch (e) {
-      console.log("ERROR - onLogin", e);
-    }
+  const onLogin = () => {
+    handleLogin()
+      .then(() => {
+        console.log("LOGIN SUCCESSFUL");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
