@@ -58,9 +58,9 @@ export const ReferencesPage = () => {
             <IconButton
               aria-label="Logout"
               icon={<HiOutlinePlus />}
-              borderRadius="sm"
+              borderRadius="full"
               colorScheme="blue"
-              size="lg"
+              size="sm"
             >
               Sair
             </IconButton>
