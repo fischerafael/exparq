@@ -6,58 +6,27 @@ import { Button, Icon, IconButton } from "@chakra-ui/react";
 import { HiOutlineLogout } from "react-icons/hi";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import { useSession } from "../../contexts/useSession";
+import { Header } from "../../components/organisms/Header";
+import { AppTemplate } from "../../components/templates/AppTemplate";
 
 export const AppPage = () => {
-  const { handleLogout, sessionUserData } = useSession();
-
-  const onLogout = () => {
-    handleLogout();
-  };
+  const { sessionUserData } = useSession();
 
   const onNavigate = (url: string) => {
     Router.push(url);
   };
 
   return (
-    <Flex
-      w="100vw"
-      h="100vh"
-      justify="center"
-      textAlign="center"
-      color="gray.900"
-    >
-      <VStack w="full" maxW="lg" bg="white" px="8">
-        <Flex h="15vh" justify="space-between" w="full" align="center">
-          <Image src="/logo-black.svg" alt="UXArch" />
-          <HStack spacing="4">
-            <Avatar
-              name={sessionUserData.displayName}
-              src={sessionUserData.photoURL}
-              bg="blue.500"
-              color="white"
-              size="sm"
-            />
-
-            <IconButton
-              aria-label="Logout"
-              icon={<HiOutlineLogout />}
-              borderRadius="sm"
-              colorScheme="blue"
-              size="lg"
-              variant="ghost"
-              onClick={onLogout}
-            >
-              Sair
-            </IconButton>
-          </HStack>
-        </Flex>
-
+    <AppTemplate
+      header={<Header />}
+      body={
         <VStack
-          h="85vh"
+          h="full"
           spacing="8"
           justify="center"
           align="flex-start"
           w="full"
+          overflowY="auto"
         >
           <Text textAlign="start" fontWeight="bold">
             Bem vindo, {sessionUserData.displayName}
@@ -113,7 +82,7 @@ export const AppPage = () => {
             Projetos
           </Button>
         </VStack>
-      </VStack>
-    </Flex>
+      }
+    />
   );
 };
