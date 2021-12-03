@@ -9,6 +9,7 @@ import { HiOutlineChevronRight, HiOutlinePlus } from "react-icons/hi";
 import { Header } from "../../../components/organisms/Header";
 import { AppTemplate } from "../../../components/templates/AppTemplate";
 import { IconButton } from "@chakra-ui/button";
+import { handleNavigate } from "../../../utils/handleNavigate";
 
 export const ReferencesPage = () => {
   return (
@@ -61,9 +62,8 @@ export const ReferencesPage = () => {
               borderRadius="full"
               colorScheme="blue"
               size="sm"
-            >
-              Sair
-            </IconButton>
+              onClick={() => handleNavigate("/app/references/add")}
+            />
           </Flex>
         </VStack>
       }
