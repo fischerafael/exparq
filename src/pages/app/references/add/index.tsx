@@ -4,10 +4,12 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@chakra-ui/breadcrumb";
-import { Flex, VStack } from "@chakra-ui/layout";
-import { HiOutlineChevronRight } from "react-icons/hi";
+import { Flex, Text, VStack } from "@chakra-ui/layout";
+import { HiOutlineChevronRight, HiOutlineX } from "react-icons/hi";
 import { Header } from "../../../../components/organisms/Header";
 import { AppTemplate } from "../../../../components/templates/AppTemplate";
+import { IconButton } from "@chakra-ui/button";
+import { handleNavigate } from "../../../../utils/handleNavigate";
 
 export const AddReferencePage = () => {
   return (
@@ -47,6 +49,27 @@ export const AddReferencePage = () => {
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
+          </Flex>
+
+          <Flex
+            w="full"
+            justify="space-between"
+            h="5vh"
+            align="center"
+            color="gray.500"
+          >
+            <Text fontWeight="bold" fontSize="xl" color="gray.900">
+              Adicionar Referência
+            </Text>
+
+            <IconButton
+              aria-label="Logout"
+              icon={<HiOutlineX />}
+              borderRadius="full"
+              colorScheme="blue"
+              size="sm"
+              onClick={() => handleNavigate("/app/references")}
+            />
           </Flex>
         </VStack>
       }
