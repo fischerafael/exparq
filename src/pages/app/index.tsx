@@ -1,12 +1,6 @@
-import NextLink from "next/link";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-} from "@chakra-ui/breadcrumb";
 import { handleNavigate } from "../../utils/handleNavigate";
 import { useSession } from "../../contexts/useSession";
-import { Flex, Text, VStack } from "@chakra-ui/layout";
+import { Text, VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
 import { HiOutlineChevronRight } from "react-icons/hi";
 
