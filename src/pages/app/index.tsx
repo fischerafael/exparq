@@ -1,6 +1,12 @@
+import NextLink from "next/link";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+} from "@chakra-ui/breadcrumb";
 import { handleNavigate } from "../../utils/handleNavigate";
 import { useSession } from "../../contexts/useSession";
-import { Text, VStack } from "@chakra-ui/layout";
+import { Flex, Text, VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
 import { HiOutlineChevronRight } from "react-icons/hi";
 
@@ -17,7 +23,7 @@ export const AppPage = () => {
         <VStack
           h="full"
           spacing="8"
-          justify="center"
+          justify="flex-start"
           align="flex-start"
           w="full"
         >
@@ -51,17 +57,6 @@ export const AppPage = () => {
             onClick={() => handleNavigate("/app/references")}
           >
             Referências
-          </Button>
-
-          <Button
-            borderRadius="sm"
-            colorScheme="blue"
-            size="lg"
-            w="full"
-            rightIcon={<HiOutlineChevronRight />}
-            py="8"
-          >
-            Avaliações
           </Button>
 
           <Button

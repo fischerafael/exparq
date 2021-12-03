@@ -10,6 +10,7 @@ import { Header } from "../../../../components/organisms/Header";
 import { AppTemplate } from "../../../../components/templates/AppTemplate";
 import { IconButton } from "@chakra-ui/button";
 import { handleNavigate } from "../../../../utils/handleNavigate";
+import { Image } from "@chakra-ui/image";
 
 export const AddReferencePage = () => {
   return (
@@ -70,6 +71,10 @@ export const AddReferencePage = () => {
               size="sm"
               onClick={() => handleNavigate("/app/references")}
             />
+          </Flex>
+
+          <Flex w="full" h="30vh">
+            <Image alt="Image" fallbackSrc="/no_image.jpg" objectFit="cover" />
           </Flex>
         </VStack>
       }
