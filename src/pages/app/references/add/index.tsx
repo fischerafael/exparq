@@ -25,6 +25,8 @@ import {
   contrast,
 } from "../../../../constants/options";
 import { useState } from "react";
+import { LightSection } from "./components/LIghtSection";
+import { UsersSection } from "./components/UsersSection";
 
 export const AddReferencePage = () => {
   const [generalInfo, setGeneralInfo] = useState({
@@ -43,7 +45,6 @@ export const AddReferencePage = () => {
   const [materialsAndContrast, setMaterialsAndContrast] = useState({
     materials: 0,
     texture: 0,
-    contrast: 0,
   });
 
   const [colorsInfo, setColorsInfo] = useState({
@@ -51,6 +52,12 @@ export const AddReferencePage = () => {
     primaryColor: 0,
     secondaryColor: 0,
     tertiaryColor: 0,
+  });
+
+  const [lightInfo, setLightInfo] = useState({
+    intensity: 0,
+    open: 0,
+    contrast: 0,
   });
 
   const [usersInfo, setUsersInfo] = useState({
@@ -76,6 +83,7 @@ export const AddReferencePage = () => {
   });
 
   console.log("PROJECT STATE", {
+    ...lightInfo,
     ...generalInfo,
     ...shapeInfo,
     ...materialsAndContrast,
@@ -242,17 +250,6 @@ export const AddReferencePage = () => {
                 })
               }
             />
-            <SelectInput
-              label="Contraste Visual"
-              options={contrast}
-              value={materialsAndContrast.contrast}
-              onChange={(e) =>
-                setMaterialsAndContrast({
-                  ...materialsAndContrast,
-                  contrast: +e.target.value,
-                })
-              }
-            />
           </VStack>
 
           <VStack h="full" w="full" spacing="4" align="flex-start">
@@ -352,6 +349,18 @@ export const AddReferencePage = () => {
               }
             />
           </VStack>
+
+          <LightSection
+            sectionTitle="5. Iluminação"
+            state={lightInfo}
+            setState={setLightInfo}
+          />
+
+          <UsersSection
+            sectionTitle="6. Usuários"
+            state={usersInfo}
+            setState={setUsersInfo}
+          />
 
           <Flex w="full" minH="5vh"></Flex>
         </VStack>

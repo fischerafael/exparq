@@ -41,12 +41,6 @@ export const textures = [
   { value: 3 / 3, label: "Totalmente Rugosa" },
 ];
 
-export const contrast = [
-  { value: 0, label: "Muito Contraste" },
-  { value: 1 / 2, label: "Algum Contraste" },
-  { value: 2 / 2, label: "Pouco Contraste" },
-];
-
 export const tones = [
   { value: 0, label: "Tons de Cinza, Branco e Preto" },
   { value: 1 / 2, label: "Tons Pasteis" },
@@ -65,3 +59,53 @@ export const colors = [
   { value: 8 / 9, label: "Roxo" },
   { value: 9 / 9, label: "Rosa" },
 ];
+
+export const lightIntensity = [
+  { value: 0, label: "Muito Escuro" },
+  { value: 1 / 3, label: "Levemente Iluminado" },
+  { value: 2 / 3, label: "Bem Iluminado" },
+  { value: 3 / 3, label: "Muito Iluminado" },
+];
+
+export const contrast = [
+  { value: 0, label: "Muito Contraste" },
+  { value: 1 / 2, label: "Algum Contraste" },
+  { value: 2 / 2, label: "Pouco Contraste" },
+];
+
+export const open = [
+  { value: 0, label: "Muito Fechado" },
+  { value: 1 / 3, label: "Mais Fechado do que aberto" },
+  { value: 2 / 3, label: "Mais Aberto do que fechado" },
+  { value: 3 / 3, label: "Muito Fechado" },
+];
+
+export const quantity = [
+  { value: 0, label: "Poucos Usuários - até 4 usuários" },
+  { value: 1 / 3, label: "Alguns Usuários - 5+" },
+  { value: 2 / 3, label: "Vários Usuários - 30+" },
+  { value: 3 / 3, label: "Muitos Usuários - 100+" },
+];
+
+export const movement = [
+  { value: 0, label: "Pouco Movimento" },
+  { value: 1 / 3, label: "Algum Movimento" },
+  { value: 2 / 3, label: "Muito Movimento" },
+  { value: 3 / 3, label: "Muitíssimo Movimento" },
+];
+
+export const options = {
+  height,
+  size,
+  complexity,
+  shape,
+  materials,
+  textures,
+  tones,
+  colors,
+  lightIntensity,
+  contrast,
+  open,
+  quantity,
+  movement,
+};
