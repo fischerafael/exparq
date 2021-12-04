@@ -94,6 +94,45 @@ export const movement = [
   { value: 3 / 3, label: "Muitíssimo Movimento" },
 ];
 
+export const landmark = [
+  { value: 0, label: "Sem Interesse" },
+  { value: 1 / 3, label: "Algum Interesse" },
+  { value: 2 / 3, label: "Muito Interesse" },
+  { value: 3 / 3, label: "Muitíssimo Interesse" },
+];
+
+export const contextType = [
+  { value: 0, label: "Floresta" },
+  { value: 1 / 5, label: "Campo" },
+  { value: 2 / 5, label: "Artificial e Urbano de Baixa Densidade" },
+  { value: 3 / 5, label: "Artificial e Urbano de Alta Densidade" },
+  { value: 4 / 5, label: "Deserto" },
+  { value: 5 / 5, label: "Gelo e Neve" },
+];
+
+export const timeOfDay = [
+  { value: 0, label: "Dia" },
+  { value: 1 / 2, label: "Noite" },
+  { value: 2 / 2, label: "Amanhecer ou Entardecer" },
+];
+
+export const weather = [
+  { value: 0, label: "Ensolarado" },
+  { value: 1 / 5, label: "Nublado" },
+  { value: 2 / 5, label: "Chuvoso" },
+  { value: 3 / 5, label: "Neve" },
+  { value: 4 / 5, label: "Neblina" },
+  { value: 5 / 5, label: "Tempestade" },
+];
+
+export const temperature = [
+  { value: 0, label: "Muito Frio" },
+  { value: 1 / 4, label: "Frio" },
+  { value: 2 / 4, label: "Ameno" },
+  { value: 3 / 4, label: "Quente" },
+  { value: 4 / 4, label: "Muito Quente" },
+];
+
 export const options = {
   height,
   size,
@@ -108,4 +147,9 @@ export const options = {
   open,
   quantity,
   movement,
+  landmark,
+  contextType,
+  timeOfDay,
+  weather,
+  temperature,
 };

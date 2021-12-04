@@ -27,6 +27,8 @@ import {
 import { useState } from "react";
 import { LightSection } from "./components/LIghtSection";
 import { UsersSection } from "./components/UsersSection";
+import { ContextSection } from "./components/ContextSection";
+import { TimeSection } from "./components/TimeSection";
 
 export const AddReferencePage = () => {
   const [generalInfo, setGeneralInfo] = useState({
@@ -360,6 +362,18 @@ export const AddReferencePage = () => {
             sectionTitle="6. Usuários"
             state={usersInfo}
             setState={setUsersInfo}
+          />
+
+          <ContextSection
+            sectionTitle="7. Contexto"
+            state={contextInfo}
+            setState={setContextInfo}
+          />
+
+          <TimeSection
+            sectionTitle="8. Tempo"
+            state={timeInfo}
+            setState={setTimeInfo}
           />
 
           <Flex w="full" minH="5vh"></Flex>
