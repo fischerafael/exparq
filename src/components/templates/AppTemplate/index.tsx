@@ -1,5 +1,6 @@
 import { Flex, VStack } from "@chakra-ui/layout";
 import { ReactNode } from "react";
+import { RadioInput } from "../../molecules/RadioInput";
 
 interface Props {
   header: ReactNode;
@@ -11,25 +12,22 @@ export const AppTemplate = ({ header, body }: Props) => {
     <Flex
       w="100vw"
       h="100vh"
-      justify="center"
-      align="center"
       direction="column"
       textAlign="center"
       color="gray.900"
     >
-      <VStack w="full" px="4">
-        <Flex h="15vh" w="full" maxW="lg">
+      <Flex justify="center" minH="10vh" w="full" shadow="xs" zIndex="10">
+        <Flex w="full" h="full" maxW="lg" px="4">
           {header}
         </Flex>
-      </VStack>
+      </Flex>
 
-      <VStack
+      <Flex
         w="full"
+        minH="90vh"
         bg="white"
-        px="4"
-        pb="8"
         overflowY="auto"
-        h="85vh"
+        justify="center"
         css={{
           "&::-webkit-scrollbar": {
             width: "4px",
@@ -43,10 +41,10 @@ export const AppTemplate = ({ header, body }: Props) => {
           },
         }}
       >
-        <VStack w="full" maxW="lg">
+        <VStack w="full" h="full" maxW="lg" p="4">
           {body}
         </VStack>
-      </VStack>
+      </Flex>
     </Flex>
   );
 };
