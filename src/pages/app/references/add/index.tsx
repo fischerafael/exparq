@@ -53,6 +53,28 @@ export const AddReferencePage = () => {
     tertiaryColor: 0,
   });
 
+  const [usersInfo, setUsersInfo] = useState({
+    quantity: 0,
+    movement: 0,
+  });
+
+  const [contextInfo, setContextInfo] = useState({
+    type: 0,
+    isProjectLandmark: 0,
+    isContextLandmark: 0,
+  });
+
+  const [timeInfo, setTimeInfo] = useState({
+    timeOfDay: 0,
+    weather: 0,
+    temperature: 0,
+  });
+
+  const [XPInfo, setXPInfo] = useState({
+    perceived: 0,
+    predicted: 0,
+  });
+
   console.log("PROJECT STATE", {
     ...generalInfo,
     ...shapeInfo,
@@ -228,6 +250,55 @@ export const AddReferencePage = () => {
                 setMaterialsAndContrast({
                   ...materialsAndContrast,
                   contrast: +e.target.value,
+                })
+              }
+            />
+          </VStack>
+
+          <VStack h="full" w="full" spacing="4" align="flex-start">
+            <Text fontWeight="bold">4. Cores</Text>
+
+            <SelectInput
+              label="Tons"
+              options={tones}
+              value={colorsInfo.tone}
+              onChange={(e) =>
+                setColorsInfo({
+                  ...colorsInfo,
+                  tone: +e.target.value,
+                })
+              }
+            />
+            <SelectInput
+              label="Cor Primária"
+              options={colors}
+              value={colorsInfo.primaryColor}
+              onChange={(e) =>
+                setColorsInfo({
+                  ...colorsInfo,
+                  primaryColor: +e.target.value,
+                })
+              }
+            />
+            <SelectInput
+              label="Cor Secundária"
+              options={colors}
+              value={colorsInfo.secondaryColor}
+              onChange={(e) =>
+                setColorsInfo({
+                  ...colorsInfo,
+                  secondaryColor: +e.target.value,
+                })
+              }
+            />
+            <SelectInput
+              label="Cor Terciária"
+              options={colors}
+              value={colorsInfo.tertiaryColor}
+              onChange={(e) =>
+                setColorsInfo({
+                  ...colorsInfo,
+                  tertiaryColor: +e.target.value,
                 })
               }
             />
