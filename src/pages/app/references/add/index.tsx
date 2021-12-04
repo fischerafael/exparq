@@ -13,7 +13,17 @@ import { handleNavigate } from "../../../../utils/handleNavigate";
 import { Image } from "@chakra-ui/image";
 import { Input } from "../../../../components/molecules/Input";
 import { SelectInput } from "../../../../components/molecules/SelectInput";
-import { height, shape, size, complexity } from "../../../../constants/options";
+import {
+  height,
+  shape,
+  size,
+  complexity,
+  materials,
+  textures,
+  tones,
+  colors,
+  contrast,
+} from "../../../../constants/options";
 import { useState } from "react";
 
 export const AddReferencePage = () => {
@@ -30,7 +40,25 @@ export const AddReferencePage = () => {
     shape: 0,
   });
 
-  console.log("PROJECT STATE", { ...generalInfo, ...shapeInfo });
+  const [materialsAndContrast, setMaterialsAndContrast] = useState({
+    materials: 0,
+    texture: 0,
+    contrast: 0,
+  });
+
+  const [colorsInfo, setColorsInfo] = useState({
+    tone: 0,
+    primaryColor: 0,
+    secondaryColor: 0,
+    tertiaryColor: 0,
+  });
+
+  console.log("PROJECT STATE", {
+    ...generalInfo,
+    ...shapeInfo,
+    ...materialsAndContrast,
+    ...colorsInfo,
+  });
 
   return (
     <AppTemplate
@@ -38,7 +66,7 @@ export const AddReferencePage = () => {
       body={
         <VStack
           h="full"
-          spacing="8"
+          spacing="12"
           justify="flex-start"
           align="flex-start"
           w="full"
@@ -163,6 +191,93 @@ export const AddReferencePage = () => {
               value={shapeInfo.shape}
               onChange={(e) =>
                 setShapeInfo({ ...shapeInfo, shape: +e.target.value })
+              }
+            />
+          </VStack>
+
+          <VStack h="full" w="full" spacing="4" align="flex-start">
+            <Text fontWeight="bold">3. Materiais e Contraste</Text>
+
+            <SelectInput
+              label="Materiais"
+              options={materials}
+              value={materialsAndContrast.materials}
+              onChange={(e) =>
+                setMaterialsAndContrast({
+                  ...materialsAndContrast,
+                  materials: +e.target.value,
+                })
+              }
+            />
+            <SelectInput
+              label="Texturas"
+              options={textures}
+              value={materialsAndContrast.texture}
+              onChange={(e) =>
+                setMaterialsAndContrast({
+                  ...materialsAndContrast,
+                  texture: +e.target.value,
+                })
+              }
+            />
+            <SelectInput
+              label="Contraste Visual"
+              options={contrast}
+              value={materialsAndContrast.contrast}
+              onChange={(e) =>
+                setMaterialsAndContrast({
+                  ...materialsAndContrast,
+                  contrast: +e.target.value,
+                })
+              }
+            />
+          </VStack>
+
+          <VStack h="full" w="full" spacing="4" align="flex-start">
+            <Text fontWeight="bold">4. Cores</Text>
+
+            <SelectInput
+              label="Tons"
+              options={tones}
+              value={colorsInfo.tone}
+              onChange={(e) =>
+                setColorsInfo({
+                  ...colorsInfo,
+                  tone: +e.target.value,
+                })
+              }
+            />
+            <SelectInput
+              label="Cor Primária"
+              options={colors}
+              value={colorsInfo.primaryColor}
+              onChange={(e) =>
+                setColorsInfo({
+                  ...colorsInfo,
+                  primaryColor: +e.target.value,
+                })
+              }
+            />
+            <SelectInput
+              label="Cor Secundária"
+              options={colors}
+              value={colorsInfo.secondaryColor}
+              onChange={(e) =>
+                setColorsInfo({
+                  ...colorsInfo,
+                  secondaryColor: +e.target.value,
+                })
+              }
+            />
+            <SelectInput
+              label="Cor Terciária"
+              options={colors}
+              value={colorsInfo.tertiaryColor}
+              onChange={(e) =>
+                setColorsInfo({
+                  ...colorsInfo,
+                  tertiaryColor: +e.target.value,
+                })
               }
             />
           </VStack>
