@@ -8,7 +8,7 @@ import { Flex, Text, VStack } from "@chakra-ui/react";
 import { HiOutlineChevronRight, HiOutlineX } from "react-icons/hi";
 import { Header } from "../../../../components/organisms/Header";
 import { AppTemplate } from "../../../../components/templates/AppTemplate";
-import { IconButton } from "@chakra-ui/button";
+import { Button, IconButton } from "@chakra-ui/button";
 import { handleNavigate } from "../../../../utils/handleNavigate";
 import { Image } from "@chakra-ui/image";
 import { Input } from "../../../../components/molecules/Input";
@@ -376,7 +376,19 @@ export const AddReferencePage = () => {
             setState={setTimeInfo}
           />
 
-          <Flex w="full" minH="5vh"></Flex>
+          <Flex w="full" minH="5vh" justify="flex-end">
+            <Button
+              borderRadius="sm"
+              colorScheme="blue"
+              size="lg"
+              variant="solid"
+              onClick={() => {}}
+            >
+              Salvar
+            </Button>
+          </Flex>
+
+          <Flex w="full" minH="5vh" />
         </VStack>
       }
     />
