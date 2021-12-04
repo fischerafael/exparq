@@ -25,10 +25,11 @@ import {
   contrast,
 } from "../../../../constants/options";
 import { useState } from "react";
-import { LightSection } from "./components/LIghtSection";
+
 import { UsersSection } from "./components/UsersSection";
 import { ContextSection } from "./components/ContextSection";
 import { TimeSection } from "./components/TimeSection";
+import { LightSection } from "./components/LightSection";
 
 export const AddReferencePage = () => {
   const [generalInfo, setGeneralInfo] = useState({
