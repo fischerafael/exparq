@@ -1,5 +1,4 @@
 import NextLink from "next/link";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -75,24 +74,25 @@ export const AddReferencePage = () => {
             />
           </Flex>
 
-          <Flex w="full" h="30vh">
+          <Flex w="full" h="40vh">
             <Image alt="Image" fallbackSrc="/no_image.jpg" objectFit="cover" />
           </Flex>
 
-          <Input
-            label="Imagem do Projeto (URL)"
-            placeholder="Ex: www.google.com/images/projeto.jpg"
-          />
+          <VStack w="full" spacing="4" align="flex-start">
+            <Text fontWeight="bold">1. Informações Gerais</Text>
 
-          <Input
-            label="Nome do Projeto"
-            placeholder="Ex: www.google.com/images/projeto.jpg"
-          />
+            <Input
+              label="Imagem da Referência (URL)"
+              placeholder="Ex: www.google.com/images/projeto.jpg"
+            />
 
-          <Input
-            label="Nome do Projeto"
-            placeholder="Ex: www.google.com/images/projeto.jpg"
-          />
+            <Input label="Nome da Referência" placeholder="Ex: Casa 6" />
+
+            <Input
+              label="Localização da Referência"
+              placeholder="Ex: Curitiba, Paraná"
+            />
+          </VStack>
         </VStack>
       }
     />
