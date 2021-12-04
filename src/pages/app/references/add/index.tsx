@@ -1,4 +1,5 @@
 import NextLink from "next/link";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,6 +12,7 @@ import { AppTemplate } from "../../../../components/templates/AppTemplate";
 import { IconButton } from "@chakra-ui/button";
 import { handleNavigate } from "../../../../utils/handleNavigate";
 import { Image } from "@chakra-ui/image";
+import { Input } from "../../../../components/molecules/Input";
 
 export const AddReferencePage = () => {
   return (
@@ -76,6 +78,21 @@ export const AddReferencePage = () => {
           <Flex w="full" h="30vh">
             <Image alt="Image" fallbackSrc="/no_image.jpg" objectFit="cover" />
           </Flex>
+
+          <Input
+            label="Imagem do Projeto (URL)"
+            placeholder="Ex: www.google.com/images/projeto.jpg"
+          />
+
+          <Input
+            label="Nome do Projeto"
+            placeholder="Ex: www.google.com/images/projeto.jpg"
+          />
+
+          <Input
+            label="Nome do Projeto"
+            placeholder="Ex: www.google.com/images/projeto.jpg"
+          />
         </VStack>
       }
     />
