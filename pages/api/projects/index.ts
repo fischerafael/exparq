@@ -32,8 +32,37 @@ export default async function handler(
     }
   }
 
-  try {
-  } catch (e: any) {
-    return res.status(400).json({ message: e.message });
+  if (method === "PUT") {
+    try {
+      const { projectId } = query;
+
+      const hasProject = await Project.findById(projectId);
+
+      if (!hasProject) throw new Error("Project not found");
+
+      const updatedProject = await Project.findByIdAndUpdate(projectId, body, {
+        new: true,
+      });
+
+      return res.status(200).json({ updatedProject });
+    } catch (e: any) {
+      return res.status(400).json({ message: e.message });
+    }
+  }
+
+  if (method === "DELETE") {
+    try {
+      const { projectId } = query;
+
+      const hasProject = await Project.findById(projectId);
+
+      if (!hasProject) throw new Error("Project not found");
+
+      await Project.findByIdAndRemove(projectId);
+
+      return res.status(200).json({ message: "Project deleted successfully" });
+    } catch (e: any) {
+      return res.status(400).json({ message: e.message });
+    }
   }
 }
