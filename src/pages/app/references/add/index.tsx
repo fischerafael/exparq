@@ -4,6 +4,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@chakra-ui/breadcrumb";
+import Router from "next/router";
 import { Flex, Text, VStack } from "@chakra-ui/react";
 import { HiOutlineChevronRight, HiOutlineX } from "react-icons/hi";
 import { Header } from "../../../../components/organisms/Header";
@@ -22,7 +23,6 @@ import {
   textures,
   tones,
   colors,
-  contrast,
 } from "../../../../constants/options";
 import { useState } from "react";
 
@@ -30,8 +30,13 @@ import { UsersSection } from "./components/UsersSection";
 import { ContextSection } from "./components/ContextSection";
 import { TimeSection } from "./components/TimeSection";
 import { LightSection } from "./components/LightSection";
+import { api } from "../../../../services/axios";
+import { useSession } from "../../../../contexts/useSession";
 
 export const AddReferencePage = () => {
+  const projectType = "reference";
+  const { sessionUserData } = useSession();
+
   const [generalInfo, setGeneralInfo] = useState({
     image: "",
     name: "",
@@ -85,13 +90,47 @@ export const AddReferencePage = () => {
     predicted: 0,
   });
 
-  console.log("PROJECT STATE", {
-    ...lightInfo,
-    ...generalInfo,
-    ...shapeInfo,
-    ...materialsAndContrast,
-    ...colorsInfo,
-  });
+  const onAddProject = () => {
+    const projectData = {
+      projectType: projectType,
+      userId: sessionUserData.email,
+      projectName: generalInfo.name,
+      projectLocation: generalInfo.location,
+      projectURL: generalInfo.image,
+      projectHeight: shapeInfo.height,
+      projectSize: shapeInfo.size,
+      projectComplexity: shapeInfo.complexity,
+      projectShape: shapeInfo.shape,
+      projectMaterials: materialsAndContrast.materials,
+      projectTexture: materialsAndContrast.texture,
+      projectColorTone: colorsInfo.tone,
+      projectColorPrimaryColor: colorsInfo.primaryColor,
+      projectColorSecondaryColor: colorsInfo.secondaryColor,
+      projectColorTertiaryColor: colorsInfo.tertiaryColor,
+      projectLightIntensity: lightInfo.intensity,
+      projectLightOpen: lightInfo.open,
+      projectLightContrast: lightInfo.contrast,
+      projectUsersQuantity: usersInfo.quantity,
+      projectUsersMovement: usersInfo.movement,
+      projectContextType: contextInfo.type,
+      projectContextIsProjectLandmark: contextInfo.isProjectLandmark,
+      projectContextIsContextLandmark: contextInfo.isContextLandmark,
+      projectTimeOfDay: timeInfo.timeOfDay,
+      projectWeather: timeInfo.weather,
+      projectTemperature: timeInfo.temperature,
+      projectXPPerceived: XPInfo.perceived,
+      projectXPPredicted: XPInfo.predicted,
+    };
+    api
+      .post("/projects", projectData)
+      .then((res) => {
+        console.log(res.data);
+        Router.push("/app/references");
+      })
+      .catch((err) => {
+        console.log("ERROR CREATING PROJECT", err);
+      });
+  };
 
   return (
     <AppTemplate
@@ -383,7 +422,7 @@ export const AddReferencePage = () => {
               colorScheme="blue"
               size="lg"
               variant="solid"
-              onClick={() => {}}
+              onClick={onAddProject}
             >
               Salvar
             </Button>
