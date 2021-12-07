@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// coment
 module.exports = {
   reactStrictMode: true,
   async headers() {
