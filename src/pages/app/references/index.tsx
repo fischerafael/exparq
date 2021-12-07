@@ -10,8 +10,27 @@ import { Header } from "../../../components/organisms/Header";
 import { AppTemplate } from "../../../components/templates/AppTemplate";
 import { IconButton } from "@chakra-ui/button";
 import { handleNavigate } from "../../../utils/handleNavigate";
+import { useEffect } from "react";
+import { api } from "../../../services/axios";
+import { useSession } from "../../../contexts/useSession";
 
 export const ReferencesPage = () => {
+  const projectType = "reference";
+  const { sessionUserData } = useSession();
+
+  useEffect(() => {
+    api
+      .get(
+        `/projects?userId=${sessionUserData.email}&projectType=${projectType}`
+      )
+      .then((res) => {
+        console.log("PROJECTS", res.data);
+      })
+      .catch((err) => {
+        console.log("ERROR LOADING REFERENCES", err);
+      });
+  }, []);
+
   return (
     <AppTemplate
       header={<Header />}
