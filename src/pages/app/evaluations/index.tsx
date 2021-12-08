@@ -74,16 +74,16 @@ export const EvaluationsPage = () => {
       });
   }, []);
 
-  const onRemove = (projectId: string) => {
-    api
-      .delete(`/projects?projectId=${projectId}`)
-      .then((res) => {
-        setProjects(projects.filter((project) => project._id !== projectId));
-      })
-      .catch((err) => {
-        console.log("ERROR DELETING");
-      });
-  };
+  //   const onRemove = (projectId: string) => {
+  //     api
+  //       .delete(`/projects?projectId=${projectId}`)
+  //       .then((res) => {
+  //         setProjects(projects.filter((project) => project._id !== projectId));
+  //       })
+  //       .catch((err) => {
+  //         console.log("ERROR DELETING");
+  //       });
+  //   };
 
   return (
     <AppTemplate
@@ -147,7 +147,6 @@ export const EvaluationsPage = () => {
                 projectLocation={project.projectLocation}
                 projectURL={project.projectURL}
                 key={project._id}
-                onRemove={() => onRemove(project._id!)}
               />
             ))}
           </VStack>
