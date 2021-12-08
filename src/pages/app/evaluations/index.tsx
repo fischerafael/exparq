@@ -128,15 +128,6 @@ export const EvaluationsPage = () => {
             <Text fontWeight="bold" fontSize="xl" color="gray.900">
               Avaliações
             </Text>
-
-            <IconButton
-              aria-label="Logout"
-              icon={<HiOutlinePlus />}
-              borderRadius="full"
-              colorScheme="blue"
-              size="sm"
-              onClick={() => handleNavigate("/app/references/add")}
-            />
           </Flex>
 
           <VStack w="full" spacing="8">
@@ -146,6 +137,8 @@ export const EvaluationsPage = () => {
                 projectName={project.projectName}
                 projectLocation={project.projectLocation}
                 projectURL={project.projectURL}
+                projectId={project._id!}
+                projectXPPerceived={project.projectXPPerceived}
                 key={project._id}
               />
             ))}

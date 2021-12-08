@@ -3,7 +3,8 @@ import { Image } from "@chakra-ui/image";
 import { Text, VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
 import { HiOutlineTrash } from "react-icons/hi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { api } from "../../../../../services/axios";
 
 const options = [
   {
@@ -50,18 +51,40 @@ const options = [
 
 interface Props {
   projectURL: string;
+  projectId: string;
   projectType: string;
   projectName: string;
   projectLocation: string;
+  projectXPPerceived: number;
 }
 
 export const ProjectEvaluationCard = ({
   projectURL,
+  projectId,
+  projectXPPerceived,
   projectType,
   projectName,
   projectLocation,
 }: Props) => {
-  const [selectedOptionValue, setSelectedOptionValue] = useState(0);
+  const [selectedOptionValue, setSelectedOptionValue] =
+    useState(projectXPPerceived);
+
+  const onChangeScore = (value: number) => {
+    setSelectedOptionValue(value);
+  };
+
+  useEffect(() => {
+    api
+      .put(`/projects?projectId=${projectId}`, {
+        projectXPPerceived: selectedOptionValue,
+      })
+      .then((res) => {
+        console.log("XP PERCEIVED UPDATED SUCCESFFULLY", res.data);
+      })
+      .catch((err) => {
+        console.log("ERROR UPDATING XP PERCEIVED", err);
+      });
+  }, [selectedOptionValue, projectId]);
 
   console.log("SELECTED OPTION VALUE", selectedOptionValue);
 
@@ -93,7 +116,7 @@ export const ProjectEvaluationCard = ({
             emoji={option.emoji}
             hashtags={option.hashtags}
             isActive={option.value === selectedOptionValue}
-            onClick={() => setSelectedOptionValue(option.value)}
+            onClick={() => onChangeScore(option.value)}
           />
         ))}
       </SimpleGrid>
