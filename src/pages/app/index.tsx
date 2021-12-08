@@ -60,6 +60,18 @@ export const AppPage = () => {
             w="full"
             rightIcon={<HiOutlineChevronRight />}
             py="8"
+            onClick={() => handleNavigate("/app/evaluations")}
+          >
+            Avaliações
+          </Button>
+
+          <Button
+            borderRadius="sm"
+            colorScheme="blue"
+            size="lg"
+            w="full"
+            rightIcon={<HiOutlineChevronRight />}
+            py="8"
           >
             Projetos
           </Button>
