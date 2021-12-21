@@ -7,6 +7,10 @@ export default async function handler(
 ) {
   const { method, body } = req;
 
+  if (method === "get") {
+    return res.status(201).json({ message: "predict" });
+  }
+
   if (method === "POST") {
     try {
       const { value1, value2 } = body;
