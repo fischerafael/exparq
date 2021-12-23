@@ -3,25 +3,27 @@ import { FaGoogle } from "react-icons/fa";
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
-// import brain from "brain.js";
+
+import brain from "brain.js";
 
 export const HomePage = () => {
   const { handleLogin } = useSession();
 
-  // const net = new brain.NeuralNetwork({ hiddenLayers: [3] });
+  console.log("BRAIN", brain);
+  const net = new brain.NeuralNetwork({ hiddenLayers: [3] });
+  // lol
+  const trainingData = [
+    { input: [0, 0], output: [0] },
+    { input: [0, 1], output: [1] },
+    { input: [1, 0], output: [1] },
+    { input: [1, 1], output: [0] },
+  ];
 
-  // const trainingData = [
-  //   { input: [0, 0], output: [0] },
-  //   { input: [0, 1], output: [1] },
-  //   { input: [1, 0], output: [1] },
-  //   { input: [1, 1], output: [0] },
-  // ];
+  net.train(trainingData);
 
-  // net.train(trainingData);
+  const result = net.run([0, 0]);
 
-  // const result = net.run([0, 0]);
-
-  // console.log("RESULT", result);
+  console.log("RESULT", result);
 
   const onLogin = () => {
     handleLogin()
