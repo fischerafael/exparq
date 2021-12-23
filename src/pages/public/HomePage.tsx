@@ -4,7 +4,7 @@ import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 
-import brain from "brain.js";
+import brain from "brainjs";
 
 // "brain.js": "^2.0.0-alpha.12",
 
