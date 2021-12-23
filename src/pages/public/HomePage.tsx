@@ -6,10 +6,11 @@ import { Flex, Text, VStack } from "@chakra-ui/layout";
 
 import brain from "brain.js";
 
+// "brain.js": "^2.0.0-alpha.12",
+
 export const HomePage = () => {
   const { handleLogin } = useSession();
 
-  console.log("BRAIN", brain);
   const net = new brain.NeuralNetwork({ hiddenLayers: [3] });
   // lol
   const trainingData = [
