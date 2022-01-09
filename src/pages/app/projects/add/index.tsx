@@ -125,7 +125,7 @@ export const AddProjectPage = () => {
       .post("/projects", projectData)
       .then((res) => {
         console.log(res.data);
-        Router.push("/app/references");
+        Router.push("/app/projects");
       })
       .catch((err) => {
         console.log("ERROR CREATING PROJECT", err);
