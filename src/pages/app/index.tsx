@@ -72,6 +72,7 @@ export const AppPage = () => {
             w="full"
             rightIcon={<HiOutlineChevronRight />}
             py="8"
+            onClick={() => handleNavigate("/app/projects")}
           >
             Projetos
           </Button>

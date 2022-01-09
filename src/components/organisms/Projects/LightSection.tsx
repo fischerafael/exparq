@@ -1,6 +1,6 @@
 import { Text, VStack } from "@chakra-ui/layout";
-import { SelectInput } from "../../../../../components/molecules/SelectInput";
-import { options } from "../../../../../constants/options";
+import { SelectInput } from "../../molecules/SelectInput";
+import { options } from "../../../constants/options";
 
 interface IState {
   intensity: number;

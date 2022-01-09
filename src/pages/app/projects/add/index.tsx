@@ -26,15 +26,15 @@ import {
 } from "../../../../constants/options";
 import { useState } from "react";
 
+import { api } from "../../../../services/axios";
+import { useSession } from "../../../../contexts/useSession";
+import { LightSection } from "../../../../components/organisms/Projects/LightSection";
 import { UsersSection } from "../../../../components/organisms/Projects/UsersSection";
 import { ContextSection } from "../../../../components/organisms/Projects/ContextSection";
 import { TimeSection } from "../../../../components/organisms/Projects/TimeSection";
-import { LightSection } from "../../../../components/organisms/Projects/LightSection";
-import { api } from "../../../../services/axios";
-import { useSession } from "../../../../contexts/useSession";
 
-export const AddReferencePage = () => {
-  const projectType = "reference";
+export const AddProjectPage = () => {
+  const projectType = "project";
   const { sessionUserData } = useSession();
 
   const [generalInfo, setGeneralInfo] = useState({
