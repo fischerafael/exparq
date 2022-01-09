@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../../services/axios";
 import { useSession } from "../../../contexts/useSession";
 import { Image } from "@chakra-ui/image";
-import { ProjectCard } from "./components/ProjectCard";
+import { ProjectCard } from "../../../components/organisms/Projects/ProjectCard";
 
 interface IProject {
   _id?: string;

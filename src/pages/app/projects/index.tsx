@@ -13,6 +13,7 @@ import { handleNavigate } from "../../../utils/handleNavigate";
 import { useEffect, useState } from "react";
 import { api } from "../../../services/axios";
 import { useSession } from "../../../contexts/useSession";
+import { ProjectCard } from "../../../components/organisms/Projects/ProjectCard";
 interface IProject {
   _id?: string;
   projectColorPrimaryColor: number;
@@ -67,16 +68,16 @@ export const ProjectsPage = () => {
       });
   }, []);
 
-  // const onRemove = (projectId: string) => {
-  //   api
-  //     .delete(`/projects?projectId=${projectId}`)
-  //     .then((res) => {
-  //       setProjects(projects.filter((project) => project._id !== projectId));
-  //     })
-  //     .catch((err) => {
-  //       console.log("ERROR DELETING");
-  //     });
-  // };
+  const onRemove = (projectId: string) => {
+    api
+      .delete(`/projects?projectId=${projectId}`)
+      .then((res) => {
+        setProjects(projects.filter((project) => project._id !== projectId));
+      })
+      .catch((err) => {
+        console.log("ERROR DELETING");
+      });
+  };
 
   return (
     <AppTemplate
@@ -132,7 +133,7 @@ export const ProjectsPage = () => {
             />
           </Flex>
 
-          {/* <VStack w="full" spacing="8">
+          <VStack w="full" spacing="8">
             {projects.map((project) => (
               <ProjectCard
                 projectType="Referência"
@@ -143,7 +144,7 @@ export const ProjectsPage = () => {
                 onRemove={() => onRemove(project._id!)}
               />
             ))}
-          </VStack> */}
+          </VStack>
         </VStack>
       }
     />
