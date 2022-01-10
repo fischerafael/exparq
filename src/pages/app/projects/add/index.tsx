@@ -154,12 +154,12 @@ export const AddProjectPage = () => {
   }, []);
 
   useEffect(() => {
-    const { predict, trainingData } = predictXP({
+    const { predict, trainingData, result } = predictXP({
       trainingData: projects,
       predict: projectData,
     });
 
-    console.log("DATA FROM USE EFFECT", predict, trainingData);
+    console.log("DATA FROM USE EFFECT", predict, trainingData, result);
   }, [
     generalInfo,
     shapeInfo,
