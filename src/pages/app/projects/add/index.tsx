@@ -5,7 +5,7 @@ import {
   BreadcrumbLink,
 } from "@chakra-ui/breadcrumb";
 import Router from "next/router";
-import { Flex, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { HiOutlineChevronRight, HiOutlineX } from "react-icons/hi";
 import { Header } from "../../../../components/organisms/Header";
 import { AppTemplate } from "../../../../components/templates/AppTemplate";
@@ -36,7 +36,8 @@ import { predictXP } from "../../../../utils/ml";
 import { IProject } from "../../../../interfaces/IProject";
 
 export const AddProjectPage = () => {
-  const projectType = "project";
+  const projectCreationType = "project";
+  const projectGetType = "reference";
   const { sessionUserData } = useSession();
 
   const [generalInfo, setGeneralInfo] = useState({
@@ -94,8 +95,10 @@ export const AddProjectPage = () => {
 
   const [projects, setProjects] = useState({} as IProject[]);
 
+  console.log("PROJECTS", projects);
+
   const projectData = {
-    projectType: projectType,
+    projectType: projectCreationType,
     userId: sessionUserData.email,
     projectName: generalInfo.name,
     projectLocation: generalInfo.location,
@@ -141,7 +144,7 @@ export const AddProjectPage = () => {
     (async () => {
       api
         .get(
-          `/projects?userId=${sessionUserData.email}&projectType=${projectType}`
+          `/projects?userId=${sessionUserData.email}&projectType=${projectGetType}`
         )
         .then((res) => {
           const projects = res.data.projects as IProject[];
@@ -154,10 +157,13 @@ export const AddProjectPage = () => {
   }, []);
 
   useEffect(() => {
+    if (!projects.length) return;
+
     const { predict, trainingData, result } = predictXP({
       trainingData: projects,
       predict: projectData,
     });
+    setXPInfo({ ...XPInfo, predicted: result });
   }, [
     generalInfo,
     shapeInfo,
@@ -167,7 +173,7 @@ export const AddProjectPage = () => {
     usersInfo,
     contextInfo,
     timeInfo,
-    XPInfo,
+    projects,
   ]);
 
   return (
@@ -188,6 +194,20 @@ export const AddProjectPage = () => {
             align="center"
             color="gray.500"
           >
+            <Box
+              position="absolute"
+              bg="white"
+              shadow="lg"
+              zIndex="10"
+              bottom="10"
+              left="10"
+              p="8"
+              border="1px"
+              borderColor="gray.200"
+            >
+              <Text fontSize="xs">XP Prevista</Text>
+              <Text fontSize="xs">{+XPInfo.predicted}</Text>
+            </Box>
             <Breadcrumb separator={<HiOutlineChevronRight />}>
               <BreadcrumbItem>
                 <BreadcrumbLink as={NextLink} href="/app">

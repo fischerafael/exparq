@@ -1,6 +1,5 @@
 import { Flex, VStack } from "@chakra-ui/layout";
 import { ReactNode } from "react";
-import { RadioInput } from "../../molecules/RadioInput";
 
 interface Props {
   header: ReactNode;
@@ -15,6 +14,7 @@ export const AppTemplate = ({ header, body }: Props) => {
       direction="column"
       textAlign="center"
       color="gray.900"
+      position="relative"
     >
       <Flex justify="center" minH="10vh" w="full" shadow="xs" zIndex="10">
         <Flex w="full" h="full" maxW="lg" px="4">
