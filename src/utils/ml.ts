@@ -9,6 +9,13 @@ interface IProps {
 }
 
 const predictXP = ({ trainingData, predict }: IProps) => {
+  if (!trainingData.length)
+    return {
+      trainingData: [],
+      predict: [],
+      result: 0,
+    };
+
   const formatedTrainningData = trainingData?.map((data) => {
     const {
       projectColorPrimaryColor,

@@ -158,8 +158,6 @@ export const AddProjectPage = () => {
       trainingData: projects,
       predict: projectData,
     });
-
-    console.log("DATA FROM USE EFFECT", predict, trainingData, result);
   }, [
     generalInfo,
     shapeInfo,
@@ -219,7 +217,7 @@ export const AddProjectPage = () => {
             color="gray.500"
           >
             <Text fontWeight="bold" fontSize="xl" color="gray.900">
-              Adicionar Referência
+              Adicionar Projeto
             </Text>
 
             <IconButton
