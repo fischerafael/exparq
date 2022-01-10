@@ -24,7 +24,7 @@ import {
   tones,
   colors,
 } from "../../../../constants/options";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { api } from "../../../../services/axios";
 import { useSession } from "../../../../contexts/useSession";
@@ -32,6 +32,8 @@ import { LightSection } from "../../../../components/organisms/Projects/LightSec
 import { UsersSection } from "../../../../components/organisms/Projects/UsersSection";
 import { ContextSection } from "../../../../components/organisms/Projects/ContextSection";
 import { TimeSection } from "../../../../components/organisms/Projects/TimeSection";
+import { predictXP } from "../../../../utils/ml";
+import { IProject } from "../../../../interfaces/IProject";
 
 export const AddProjectPage = () => {
   const projectType = "project";
@@ -90,37 +92,40 @@ export const AddProjectPage = () => {
     predicted: 0,
   });
 
+  const [projects, setProjects] = useState({} as IProject[]);
+
+  const projectData = {
+    projectType: projectType,
+    userId: sessionUserData.email,
+    projectName: generalInfo.name,
+    projectLocation: generalInfo.location,
+    projectURL: generalInfo.image,
+    projectHeight: shapeInfo.height,
+    projectSize: shapeInfo.size,
+    projectComplexity: shapeInfo.complexity,
+    projectShape: shapeInfo.shape,
+    projectMaterials: materialsAndContrast.materials,
+    projectTexture: materialsAndContrast.texture,
+    projectColorTone: colorsInfo.tone,
+    projectColorPrimaryColor: colorsInfo.primaryColor,
+    projectColorSecondaryColor: colorsInfo.secondaryColor,
+    projectColorTertiaryColor: colorsInfo.tertiaryColor,
+    projectLightIntensity: lightInfo.intensity,
+    projectLightOpen: lightInfo.open,
+    projectLightContrast: lightInfo.contrast,
+    projectUsersQuantity: usersInfo.quantity,
+    projectUsersMovement: usersInfo.movement,
+    projectContextType: contextInfo.type,
+    projectContextIsProjectLandmark: contextInfo.isProjectLandmark,
+    projectContextIsContextLandmark: contextInfo.isContextLandmark,
+    projectTimeOfDay: timeInfo.timeOfDay,
+    projectWeather: timeInfo.weather,
+    projectTemperature: timeInfo.temperature,
+    projectXPPerceived: XPInfo.perceived,
+    projectXPPredicted: XPInfo.predicted,
+  };
+
   const onAddProject = () => {
-    const projectData = {
-      projectType: projectType,
-      userId: sessionUserData.email,
-      projectName: generalInfo.name,
-      projectLocation: generalInfo.location,
-      projectURL: generalInfo.image,
-      projectHeight: shapeInfo.height,
-      projectSize: shapeInfo.size,
-      projectComplexity: shapeInfo.complexity,
-      projectShape: shapeInfo.shape,
-      projectMaterials: materialsAndContrast.materials,
-      projectTexture: materialsAndContrast.texture,
-      projectColorTone: colorsInfo.tone,
-      projectColorPrimaryColor: colorsInfo.primaryColor,
-      projectColorSecondaryColor: colorsInfo.secondaryColor,
-      projectColorTertiaryColor: colorsInfo.tertiaryColor,
-      projectLightIntensity: lightInfo.intensity,
-      projectLightOpen: lightInfo.open,
-      projectLightContrast: lightInfo.contrast,
-      projectUsersQuantity: usersInfo.quantity,
-      projectUsersMovement: usersInfo.movement,
-      projectContextType: contextInfo.type,
-      projectContextIsProjectLandmark: contextInfo.isProjectLandmark,
-      projectContextIsContextLandmark: contextInfo.isContextLandmark,
-      projectTimeOfDay: timeInfo.timeOfDay,
-      projectWeather: timeInfo.weather,
-      projectTemperature: timeInfo.temperature,
-      projectXPPerceived: XPInfo.perceived,
-      projectXPPredicted: XPInfo.predicted,
-    };
     api
       .post("/projects", projectData)
       .then((res) => {
@@ -131,6 +136,41 @@ export const AddProjectPage = () => {
         console.log("ERROR CREATING PROJECT", err);
       });
   };
+
+  useEffect(() => {
+    (async () => {
+      api
+        .get(
+          `/projects?userId=${sessionUserData.email}&projectType=${projectType}`
+        )
+        .then((res) => {
+          const projects = res.data.projects as IProject[];
+          setProjects(projects);
+        })
+        .catch((err) => {
+          console.log("ERROR LOADING PROJECTS", err);
+        });
+    })();
+  }, []);
+
+  useEffect(() => {
+    const { predict, trainingData } = predictXP({
+      trainingData: projects,
+      predict: projectData,
+    });
+
+    console.log("DATA FROM USE EFFECT", predict, trainingData);
+  }, [
+    generalInfo,
+    shapeInfo,
+    materialsAndContrast,
+    colorsInfo,
+    lightInfo,
+    usersInfo,
+    contextInfo,
+    timeInfo,
+    XPInfo,
+  ]);
 
   return (
     <AppTemplate
@@ -158,13 +198,13 @@ export const AddProjectPage = () => {
               </BreadcrumbItem>
 
               <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app/references">
-                  Referências
+                <BreadcrumbLink as={NextLink} href="/app/projects">
+                  Projetos
                 </BreadcrumbLink>
               </BreadcrumbItem>
 
               <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app/references">
+                <BreadcrumbLink as={NextLink} href="/app/projects/add">
                   Adicionar
                 </BreadcrumbLink>
               </BreadcrumbItem>
@@ -188,7 +228,7 @@ export const AddProjectPage = () => {
               borderRadius="full"
               colorScheme="blue"
               size="sm"
-              onClick={() => handleNavigate("/app/references")}
+              onClick={() => handleNavigate("/app/projects")}
             />
           </Flex>
 
