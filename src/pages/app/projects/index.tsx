@@ -110,6 +110,7 @@ export const ProjectsPage = () => {
                 projectName={project.projectName}
                 projectLocation={project.projectLocation}
                 projectURL={project.projectURL}
+                predictedXP={project.projectXPPredicted}
                 key={project._id}
                 onRemove={() => onRemove(project._id!)}
               />

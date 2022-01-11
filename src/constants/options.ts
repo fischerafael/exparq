@@ -61,10 +61,10 @@ export const colors = [
 ];
 
 export const lightIntensity = [
-  { value: 0, label: "Muito Escuro" },
-  { value: 1 / 3, label: "Levemente Iluminado" },
-  { value: 2 / 3, label: "Bem Iluminado" },
-  { value: 3 / 3, label: "Muito Iluminado" },
+  { value: 0, label: "Muito Escuro - Interno" },
+  { value: 1 / 3, label: "Levemente Iluminado - Interno ou Transição" },
+  { value: 2 / 3, label: "Bem Iluminado - Externo ou Transição" },
+  { value: 3 / 3, label: "Muito Iluminado - Externo" },
 ];
 
 export const contrast = [
@@ -77,7 +77,7 @@ export const open = [
   { value: 0, label: "Muito Fechado" },
   { value: 1 / 3, label: "Mais Fechado do que aberto" },
   { value: 2 / 3, label: "Mais Aberto do que fechado" },
-  { value: 3 / 3, label: "Muito Fechado" },
+  { value: 3 / 3, label: "Muito Aberto" },
 ];
 
 export const quantity = [

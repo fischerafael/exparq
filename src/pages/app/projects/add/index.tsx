@@ -34,6 +34,7 @@ import { ContextSection } from "../../../../components/organisms/Projects/Contex
 import { TimeSection } from "../../../../components/organisms/Projects/TimeSection";
 import { predictXP } from "../../../../utils/ml";
 import { IProject } from "../../../../interfaces/IProject";
+import { getEmoji } from "../../../../utils/getEmoji";
 
 export const AddProjectPage = () => {
   const projectCreationType = "project";
@@ -176,6 +177,8 @@ export const AddProjectPage = () => {
     projects,
   ]);
 
+  const emoji = getEmoji(XPInfo.predicted);
+
   return (
     <AppTemplate
       header={<Header />}
@@ -197,16 +200,17 @@ export const AddProjectPage = () => {
             <Box
               position="absolute"
               bg="white"
-              shadow="lg"
+              shadow="xl"
               zIndex="10"
-              bottom="10"
-              left="10"
+              bottom="4"
+              left="4"
               p="8"
               border="1px"
               borderColor="gray.200"
             >
               <Text fontSize="xs">XP Prevista</Text>
-              <Text fontSize="xs">{+XPInfo.predicted}</Text>
+
+              <Text fontSize="xl">{emoji}</Text>
             </Box>
             <Breadcrumb separator={<HiOutlineChevronRight />}>
               <BreadcrumbItem>
@@ -347,55 +351,6 @@ export const AddProjectPage = () => {
                 setMaterialsAndContrast({
                   ...materialsAndContrast,
                   texture: +e.target.value,
-                })
-              }
-            />
-          </VStack>
-
-          <VStack h="full" w="full" spacing="4" align="flex-start">
-            <Text fontWeight="bold">4. Cores</Text>
-
-            <SelectInput
-              label="Tons"
-              options={tones}
-              value={colorsInfo.tone}
-              onChange={(e) =>
-                setColorsInfo({
-                  ...colorsInfo,
-                  tone: +e.target.value,
-                })
-              }
-            />
-            <SelectInput
-              label="Cor Primária"
-              options={colors}
-              value={colorsInfo.primaryColor}
-              onChange={(e) =>
-                setColorsInfo({
-                  ...colorsInfo,
-                  primaryColor: +e.target.value,
-                })
-              }
-            />
-            <SelectInput
-              label="Cor Secundária"
-              options={colors}
-              value={colorsInfo.secondaryColor}
-              onChange={(e) =>
-                setColorsInfo({
-                  ...colorsInfo,
-                  secondaryColor: +e.target.value,
-                })
-              }
-            />
-            <SelectInput
-              label="Cor Terciária"
-              options={colors}
-              value={colorsInfo.tertiaryColor}
-              onChange={(e) =>
-                setColorsInfo({
-                  ...colorsInfo,
-                  tertiaryColor: +e.target.value,
                 })
               }
             />

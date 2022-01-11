@@ -1,13 +1,16 @@
 import { IconButton } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Text, VStack } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/react";
 import { HiOutlineTrash } from "react-icons/hi";
+import { getEmoji } from "../../../utils/getEmoji";
 
 interface Props {
   projectURL: string;
   projectType: string;
   projectName: string;
   projectLocation: string;
+  predictedXP?: number;
   onRemove: () => void;
 }
 
@@ -16,6 +19,7 @@ export const ProjectCard = ({
   projectType,
   projectName,
   projectLocation,
+  predictedXP,
   onRemove,
 }: Props) => {
   return (
@@ -42,6 +46,13 @@ export const ProjectCard = ({
         icon={<HiOutlineTrash />}
         onClick={onRemove}
       />
+
+      {predictedXP && (
+        <VStack position="absolute" right="4" bottom="4" align="flex-end">
+          <Text fontSize="xs">XP Prevista</Text>
+          <Text>{getEmoji(predictedXP)}</Text>
+        </VStack>
+      )}
 
       <VStack spacing="0" w="full" align="flex-start" p="4">
         <Text fontSize="xs">{projectType}</Text>

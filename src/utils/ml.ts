@@ -115,7 +115,7 @@ const predictXP = ({ trainingData, predict }: IProps) => {
   return {
     trainingData: formatedTrainningData,
     predict: formatedPredict,
-    result,
+    result: result[0],
   };
 };
 

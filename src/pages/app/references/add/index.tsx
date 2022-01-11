@@ -343,55 +343,6 @@ export const AddReferencePage = () => {
             />
           </VStack>
 
-          <VStack h="full" w="full" spacing="4" align="flex-start">
-            <Text fontWeight="bold">4. Cores</Text>
-
-            <SelectInput
-              label="Tons"
-              options={tones}
-              value={colorsInfo.tone}
-              onChange={(e) =>
-                setColorsInfo({
-                  ...colorsInfo,
-                  tone: +e.target.value,
-                })
-              }
-            />
-            <SelectInput
-              label="Cor Primária"
-              options={colors}
-              value={colorsInfo.primaryColor}
-              onChange={(e) =>
-                setColorsInfo({
-                  ...colorsInfo,
-                  primaryColor: +e.target.value,
-                })
-              }
-            />
-            <SelectInput
-              label="Cor Secundária"
-              options={colors}
-              value={colorsInfo.secondaryColor}
-              onChange={(e) =>
-                setColorsInfo({
-                  ...colorsInfo,
-                  secondaryColor: +e.target.value,
-                })
-              }
-            />
-            <SelectInput
-              label="Cor Terciária"
-              options={colors}
-              value={colorsInfo.tertiaryColor}
-              onChange={(e) =>
-                setColorsInfo({
-                  ...colorsInfo,
-                  tertiaryColor: +e.target.value,
-                })
-              }
-            />
-          </VStack>
-
           <LightSection
             sectionTitle="5. Iluminação"
             state={lightInfo}
