@@ -6,9 +6,31 @@ import { HiOutlineChevronRight } from "react-icons/hi";
 
 import { Header } from "../../components/organisms/Header";
 import { AppTemplate } from "../../components/templates/AppTemplate";
+import { useEffect, useState } from "react";
+import { api } from "../../services/axios";
+import { IProject } from "../../interfaces/IProject";
 
 export const AppPage = () => {
+  const projectType = "reference";
   const { sessionUserData } = useSession();
+  const [projects, setProjects] = useState([] as IProject[]);
+
+  const isEvaluationDisabled = projects.length < 1 ? true : false;
+  const isProjectDisabled = projects.length < 3 ? true : false;
+
+  useEffect(() => {
+    api
+      .get(
+        `/projects?userId=${sessionUserData.email}&projectType=${projectType}`
+      )
+      .then((res) => {
+        const projects = res.data.projects as IProject[];
+        setProjects(projects);
+      })
+      .catch((err) => {
+        console.log("ERROR LOADING REFERENCES", err);
+      });
+  }, []);
 
   return (
     <AppTemplate
@@ -60,6 +82,7 @@ export const AppPage = () => {
             w="full"
             rightIcon={<HiOutlineChevronRight />}
             py="8"
+            isDisabled={isEvaluationDisabled}
             onClick={() => handleNavigate("/app/evaluations")}
           >
             Avaliações
@@ -72,6 +95,7 @@ export const AppPage = () => {
             w="full"
             rightIcon={<HiOutlineChevronRight />}
             py="8"
+            isDisabled={isProjectDisabled}
             onClick={() => handleNavigate("/app/projects")}
           >
             Projetos
