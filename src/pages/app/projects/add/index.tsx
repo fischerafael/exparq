@@ -35,6 +35,7 @@ import { TimeSection } from "../../../../components/organisms/Projects/TimeSecti
 import { predictXP } from "../../../../utils/ml";
 import { IProject } from "../../../../interfaces/IProject";
 import { getEmoji } from "../../../../utils/getEmoji";
+import { useIsDisabled } from "../../../../hooks/useIsDisabled";
 
 export const AddProjectPage = () => {
   const projectCreationType = "project";
@@ -96,8 +97,6 @@ export const AddProjectPage = () => {
 
   const [projects, setProjects] = useState({} as IProject[]);
 
-  console.log("PROJECTS", projects);
-
   const projectData = {
     projectType: projectCreationType,
     userId: sessionUserData.email,
@@ -128,6 +127,8 @@ export const AddProjectPage = () => {
     projectXPPerceived: XPInfo.perceived,
     projectXPPredicted: XPInfo.predicted,
   };
+
+  console.log(projectData.projectXPPredicted);
 
   const onAddProject = () => {
     api
@@ -160,11 +161,17 @@ export const AddProjectPage = () => {
   useEffect(() => {
     if (!projects.length) return;
 
-    const { predict, trainingData, result } = predictXP({
-      trainingData: projects,
-      predict: projectData,
-    });
-    setXPInfo({ ...XPInfo, predicted: result });
+    const debounce = setTimeout(() => {
+      const { result } = predictXP({
+        trainingData: projects,
+        predict: projectData,
+      });
+
+      setXPInfo({ ...XPInfo, predicted: result });
+    }, 5000);
+    return () => {
+      clearTimeout(debounce);
+    };
   }, [
     generalInfo,
     shapeInfo,
@@ -178,6 +185,8 @@ export const AddProjectPage = () => {
   ]);
 
   const emoji = getEmoji(XPInfo.predicted);
+
+  const { isDisabled } = useIsDisabled(generalInfo);
 
   return (
     <AppTemplate
@@ -436,6 +445,7 @@ export const AddProjectPage = () => {
               size="lg"
               variant="solid"
               onClick={onAddProject}
+              isDisabled={isDisabled}
             >
               Salvar
             </Button>
