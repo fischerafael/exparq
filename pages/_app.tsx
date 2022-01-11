@@ -6,9 +6,12 @@ import { SessionProvider } from "../src/contexts/useSession";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
-      {/* <Head>
-        <script src="//unpkg.com/brain.js" />
-      </Head> */}
+      <Head>
+        {/* <link rel="shortcut icon" href={favicon} /> */}
+        <link rel="shortcut icon" href="/logo-black.svg" />
+        <title>UX Arch</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <SessionProvider>
         <Component {...pageProps} />
       </SessionProvider>
