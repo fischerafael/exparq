@@ -49,7 +49,7 @@ export const AppPage = () => {
 
           <Text textAlign="start">
             Primeiramente, adicione referências de projetos existentes. Quanto
-            mais referências você adicionar, mais preciso será a previsão da
+            mais referências você adicionar, mais precisa será a previsão da
             inteligência artificial do UxArch.
           </Text>
           <Text textAlign="start">
