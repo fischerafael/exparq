@@ -33,6 +33,7 @@ export const ProjectCard = ({
       overflow="hidden"
       _hover={{ shadow: "md" }}
       p="0"
+      position="relative"
     >
       <Image alt="" w="full" h="30vh" objectFit="cover" src={projectURL} />
 

@@ -181,7 +181,6 @@ export const EditProjectPage = () => {
 
     setXPInfo({ ...XPInfo, predicted: result });
   }, [
-    generalInfo,
     shapeInfo,
     materialsAndContrast,
     colorsInfo,
