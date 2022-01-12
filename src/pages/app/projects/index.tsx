@@ -4,6 +4,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@chakra-ui/breadcrumb";
+import { useRouter } from "next/router";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 import { HiOutlineChevronRight, HiOutlinePlus } from "react-icons/hi";
 import { Header } from "../../../components/organisms/Header";
@@ -18,6 +19,8 @@ import { IProject } from "../../../interfaces/IProject";
 
 export const ProjectsPage = () => {
   const projectType = "project";
+  const { push } = useRouter();
+
   const { sessionUserData } = useSession();
 
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -47,6 +50,10 @@ export const ProjectsPage = () => {
       .catch((err) => {
         console.log("ERROR DELETING");
       });
+  };
+
+  const onNavigate = (projectId: string) => {
+    push(`/app/projects/edit?id=${projectId}`);
   };
 
   return (
@@ -113,6 +120,7 @@ export const ProjectsPage = () => {
                 predictedXP={project.projectXPPredicted}
                 key={project._id}
                 onRemove={() => onRemove(project._id!)}
+                onClick={() => onNavigate(project._id!)}
               />
             ))}
           </VStack>

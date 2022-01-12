@@ -4,7 +4,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@chakra-ui/breadcrumb";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { HiOutlineChevronRight, HiOutlineX } from "react-icons/hi";
 import { Header } from "../../../../components/organisms/Header";
@@ -34,12 +34,17 @@ import { ContextSection } from "../../../../components/organisms/Projects/Contex
 import { TimeSection } from "../../../../components/organisms/Projects/TimeSection";
 import { predictXP } from "../../../../utils/ml";
 import { IProject } from "../../../../interfaces/IProject";
+import { getEmoji } from "../../../../utils/getEmoji";
 import { useIsDisabled } from "../../../../hooks/useIsDisabled";
 import { useProjectState } from "../../../../hooks/useProjectState";
+import { Project } from "../../../../services/mongodb/Project";
 
-export const AddProjectPage = () => {
+export const EditProjectPage = () => {
   const projectCreationType = "project";
   const projectGetType = "reference";
+
+  const { query } = useRouter();
+  const { id } = query;
 
   const { sessionUserData } = useSession();
   const {
@@ -64,21 +69,21 @@ export const AddProjectPage = () => {
     setXPInfo,
     emoji,
   } = useProjectState({
-    projectCreationType,
+    projectCreationType: projectCreationType,
     userEmail: sessionUserData.email,
   });
 
-  const [projects, setProjects] = useState({} as IProject[]);
+  const [projects, setProjects] = useState([] as IProject[]);
 
-  const onAddProject = () => {
+  const onEditProject = () => {
     api
-      .post("/projects", projectData)
+      .put(`/projects/${id}`, projectData)
       .then((res) => {
         console.log(res.data);
         Router.push("/app/projects");
       })
       .catch((err) => {
-        console.log("ERROR CREATING PROJECT", err);
+        console.log("ERROR EDITING PROJECT", err);
       });
   };
 
@@ -97,6 +102,74 @@ export const AddProjectPage = () => {
         });
     })();
   }, []);
+
+  useEffect(() => {
+    if (!id) return;
+
+    (async () => {
+      api
+        .get(`/projects/${id}`)
+        .then((res) => {
+          const project = res?.data?.project as IProject;
+
+          setGeneralInfo({
+            image: project.projectURL,
+            location: project.projectLocation,
+            name: project.projectName,
+          });
+
+          setShapeInfo({
+            complexity: project.projectComplexity,
+            height: project.projectHeight,
+            shape: project.projectShape,
+            size: project.projectSize,
+          });
+
+          setMaterialsAndContrast({
+            materials: project.projectMaterials,
+            texture: project.projectTexture,
+          });
+
+          setColorsInfo({
+            tone: project.projectColorTone,
+            primaryColor: project.projectColorPrimaryColor,
+            secondaryColor: project.projectColorSecondaryColor,
+            tertiaryColor: project.projectColorTertiaryColor,
+          });
+
+          setLightInfo({
+            contrast: project.projectLightContrast,
+            intensity: project.projectLightIntensity,
+            open: project.projectLightOpen,
+          });
+
+          setUsersInfo({
+            quantity: project.projectUsersQuantity,
+            movement: project.projectUsersMovement,
+          });
+
+          setContextInfo({
+            type: project.projectContextType,
+            isContextLandmark: project.projectContextIsContextLandmark,
+            isProjectLandmark: project.projectContextIsProjectLandmark,
+          });
+
+          setTimeInfo({
+            timeOfDay: project.projectTimeOfDay,
+            weather: project.projectWeather,
+            temperature: project.projectTemperature,
+          });
+
+          setXPInfo({
+            perceived: project.projectXPPerceived,
+            predicted: project.projectXPPredicted,
+          });
+        })
+        .catch((err) => {
+          console.log("ERROR LOADING PROJECT", err);
+        });
+    })();
+  }, [id]);
 
   useEffect(() => {
     if (!projects.length) return;
@@ -169,7 +242,7 @@ export const AddProjectPage = () => {
 
               <BreadcrumbItem>
                 <BreadcrumbLink as={NextLink} href="/app/projects/add">
-                  Adicionar
+                  Editar
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
@@ -183,7 +256,7 @@ export const AddProjectPage = () => {
             color="gray.500"
           >
             <Text fontWeight="bold" fontSize="xl" color="gray.900">
-              Adicionar Projeto
+              Editar Projeto
             </Text>
 
             <IconButton
@@ -377,7 +450,7 @@ export const AddProjectPage = () => {
               colorScheme="blue"
               size="lg"
               variant="solid"
-              onClick={onAddProject}
+              onClick={onEditProject}
               isDisabled={isDisabled}
             >
               Salvar
