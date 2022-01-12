@@ -148,6 +148,7 @@ export const ReferencesPage = () => {
                 projectURL={project.projectURL}
                 key={project._id}
                 onRemove={() => onRemove(project._id!)}
+                onClick={() => {}}
               />
             ))}
           </VStack>
