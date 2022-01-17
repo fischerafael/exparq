@@ -19,6 +19,7 @@ import { api } from "../../../services/axios";
 import { useSession } from "../../../contexts/useSession";
 import { Image } from "@chakra-ui/image";
 import { ProjectCard } from "../../../components/organisms/Projects/ProjectCard";
+import { useRouter } from "next/router";
 
 interface IProject {
   _id?: string;
@@ -54,6 +55,8 @@ interface IProject {
 
 export const ReferencesPage = () => {
   const projectType = "reference";
+  const { push } = useRouter();
+
   const { sessionUserData } = useSession();
 
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -83,6 +86,10 @@ export const ReferencesPage = () => {
       .catch((err) => {
         console.log("ERROR DELETING");
       });
+  };
+
+  const onNavigate = (projectId: string) => {
+    push(`/app/references/edit?id=${projectId}`);
   };
 
   return (
@@ -148,7 +155,7 @@ export const ReferencesPage = () => {
                 projectURL={project.projectURL}
                 key={project._id}
                 onRemove={() => onRemove(project._id!)}
-                onClick={() => {}}
+                onClick={() => onNavigate(project._id!)}
               />
             ))}
           </VStack>
