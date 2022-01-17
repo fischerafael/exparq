@@ -39,6 +39,7 @@ import { useIsDisabled } from "../../../../hooks/useIsDisabled";
 import { useProjectState } from "../../../../hooks/useProjectState";
 import { Project } from "../../../../services/mongodb/Project";
 import { ColorSection } from "../../../../components/organisms/Projects/ColorSection";
+import { MaterialsSection } from "../../../../components/organisms/Projects/MaterialsSection";
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
@@ -344,32 +345,11 @@ export const EditReferencePage = () => {
             />
           </VStack>
 
-          <VStack h="full" w="full" spacing="4" align="flex-start">
-            <Text fontWeight="bold">3. Materiais e Contraste</Text>
-
-            <SelectInput
-              label="Materiais"
-              options={materials}
-              value={materialsAndContrast.materials}
-              onChange={(e) =>
-                setMaterialsAndContrast({
-                  ...materialsAndContrast,
-                  materials: +e.target.value,
-                })
-              }
-            />
-            <SelectInput
-              label="Texturas"
-              options={textures}
-              value={materialsAndContrast.texture}
-              onChange={(e) =>
-                setMaterialsAndContrast({
-                  ...materialsAndContrast,
-                  texture: +e.target.value,
-                })
-              }
-            />
-          </VStack>
+          <MaterialsSection
+            sectionTitle="3. Materiais e Texturas"
+            state={materialsAndContrast}
+            setState={setMaterialsAndContrast}
+          />
 
           <ColorSection
             sectionTitle="4. Cores"
