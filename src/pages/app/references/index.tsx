@@ -22,6 +22,7 @@ import { ProjectCard } from "../../../components/organisms/Projects/ProjectCard"
 import { useRouter } from "next/router";
 import { useLoading } from "../../../hooks/useLoading";
 import { LoadingSpinner } from "../../../components/organisms/LoadingSpinner";
+import { useToats } from "../../../hooks/useToast";
 
 interface IProject {
   _id?: string;
@@ -58,6 +59,7 @@ interface IProject {
 export const ReferencesPage = () => {
   const projectType = "reference";
   const { push } = useRouter();
+  const { onSuccess, onError } = useToats();
 
   const { sessionUserData } = useSession();
 
@@ -83,9 +85,10 @@ export const ReferencesPage = () => {
       .delete(`/projects?projectId=${projectId}`)
       .then((res) => {
         setProjects(projects.filter((project) => project._id !== projectId));
+        onSuccess("Referência removida com sucesso!");
       })
       .catch((err) => {
-        console.log("ERROR DELETING");
+        onError("Falha ao remover referência!");
       });
   };
 
