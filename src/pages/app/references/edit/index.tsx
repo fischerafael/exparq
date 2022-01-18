@@ -32,12 +32,10 @@ import { LightSection } from "../../../../components/organisms/Projects/LightSec
 import { UsersSection } from "../../../../components/organisms/Projects/UsersSection";
 import { ContextSection } from "../../../../components/organisms/Projects/ContextSection";
 import { TimeSection } from "../../../../components/organisms/Projects/TimeSection";
-import { predictXP } from "../../../../utils/ml";
 import { IProject } from "../../../../interfaces/IProject";
 import { getEmoji } from "../../../../utils/getEmoji";
 import { useIsDisabled } from "../../../../hooks/useIsDisabled";
 import { useProjectState } from "../../../../hooks/useProjectState";
-import { Project } from "../../../../services/mongodb/Project";
 import { ColorSection } from "../../../../components/organisms/Projects/ColorSection";
 import { MaterialsSection } from "../../../../components/organisms/Projects/MaterialsSection";
 import { ShapeSection } from "../../../../components/organisms/Projects/ShapeSection";
@@ -45,13 +43,11 @@ import { GeneralSection } from "../../../../components/organisms/Projects/Genera
 import { BreadCrumb } from "../../../../components/organisms/BreadCrumb";
 import { breadcrumbs } from "../../../../constants/breadCrumb";
 import { ImageSection } from "../../../../components/organisms/Projects/ImageSection";
-import { useGetProjectsByUser } from "../../../../hooks/useGetProjectsByUser";
 import { useLoading } from "../../../../hooks/useLoading";
 import { LoadingSpinner } from "../../../../components/organisms/LoadingSpinner";
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
-  const projectGetType = "reference";
 
   const { query } = useRouter();
   const { id } = query;
