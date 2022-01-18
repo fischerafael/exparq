@@ -26,10 +26,12 @@ import { ImageSection } from "../../../../components/organisms/Projects/ImageSec
 import { useLoading } from "../../../../hooks/useLoading";
 import { LoadingSpinner } from "../../../../components/organisms/LoadingSpinner";
 import { PageHeader } from "../../../../components/organisms/Projects/PageHeader";
+import { useToats } from "../../../../hooks/useToast";
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
   const { sessionUserData } = useSession();
+  const { onInfo, onError, onSuccess } = useToats();
 
   const { query } = useRouter();
   const { id } = query;
@@ -63,11 +65,11 @@ export const EditReferencePage = () => {
     api
       .put(`/projects/${id}`, projectData)
       .then((res) => {
-        console.log(res.data);
+        onSuccess("Projeto atualizado com sucesso");
         Router.push("/app/references");
       })
       .catch((err) => {
-        console.log("ERROR EDITING PROJECT", err);
+        onError("Falha ao atualizar projeto");
       });
   };
 
@@ -136,9 +138,11 @@ export const EditReferencePage = () => {
             perceived: project.projectXPPerceived,
             predicted: project.projectXPPredicted,
           });
+
+          onInfo("Projeto carregado com sucesso!");
         })
         .catch((err) => {
-          console.log("ERROR LOADING PROJECT", err);
+          onError("Falha ao carregar projeto");
         });
     })();
   }, [id]);

@@ -24,7 +24,7 @@ import { useToats } from "../../../../hooks/useToast";
 
 export const AddReferencePage = () => {
   const projectType = "reference";
-  const { onSuccess } = useToats();
+  const { onSuccess, onError } = useToats();
   const { sessionUserData } = useSession();
 
   const {
@@ -90,7 +90,7 @@ export const AddReferencePage = () => {
         Router.push("/app/references");
       })
       .catch((err) => {
-        console.log("ERROR CREATING PROJECT", err);
+        onError("Erro ao criar o projeto. Tente novamente.");
       });
   };
 
