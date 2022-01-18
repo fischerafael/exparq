@@ -1,5 +1,5 @@
 import Router from "next/router";
-import { Flex, Text, VStack } from "@chakra-ui/react";
+import { Flex, VStack } from "@chakra-ui/react";
 import { Header } from "../../../../components/organisms/Header";
 import { AppTemplate } from "../../../../components/templates/AppTemplate";
 import { Button } from "@chakra-ui/button";
@@ -20,9 +20,11 @@ import { ShapeSection } from "../../../../components/organisms/Projects/ShapeSec
 import { MaterialsSection } from "../../../../components/organisms/Projects/MaterialsSection";
 import { ColorSection } from "../../../../components/organisms/Projects/ColorSection";
 import { useProjectState } from "../../../../hooks/useProjectState";
+import { useToats } from "../../../../hooks/useToast";
 
 export const AddReferencePage = () => {
   const projectType = "reference";
+  const { onSuccess } = useToats();
   const { sessionUserData } = useSession();
 
   const {
@@ -84,7 +86,7 @@ export const AddReferencePage = () => {
     api
       .post("/projects", projectData)
       .then((res) => {
-        console.log(res.data);
+        onSuccess("Projeto Criado!");
         Router.push("/app/references");
       })
       .catch((err) => {
