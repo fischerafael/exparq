@@ -17,7 +17,7 @@ export const PageHeader = ({ pageTitle, closeUrl }: Props) => {
       color="gray.500"
     >
       <Text fontWeight="bold" fontSize="xl" color="gray.900">
-        Editar Referência
+        {pageTitle}
       </Text>
 
       <IconButton

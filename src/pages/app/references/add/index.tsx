@@ -34,6 +34,9 @@ import { api } from "../../../../services/axios";
 import { useSession } from "../../../../contexts/useSession";
 import { useIsDisabled } from "../../../../hooks/useIsDisabled";
 import { ImageSection } from "../../../../components/organisms/Projects/ImageSection";
+import { BreadCrumb } from "../../../../components/organisms/BreadCrumb";
+import { breadcrumbs } from "../../../../constants/breadCrumb";
+import { PageHeader } from "../../../../components/organisms/Projects/PageHeader";
 
 export const AddReferencePage = () => {
   const projectType = "reference";
@@ -147,54 +150,9 @@ export const AddReferencePage = () => {
           align="flex-start"
           w="full"
         >
-          <Flex
-            w="full"
-            justify="space-between"
-            minH="5vh"
-            align="center"
-            color="gray.500"
-          >
-            <Breadcrumb separator={<HiOutlineChevronRight />}>
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app">
-                  App
-                </BreadcrumbLink>
-              </BreadcrumbItem>
+          <BreadCrumb items={breadcrumbs.addReferenceBreadCrumb} />
 
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app/references">
-                  Referências
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app/references">
-                  Adicionar
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            </Breadcrumb>
-          </Flex>
-
-          <Flex
-            w="full"
-            justify="space-between"
-            h="5vh"
-            align="center"
-            color="gray.500"
-          >
-            <Text fontWeight="bold" fontSize="xl" color="gray.900">
-              Adicionar Referência
-            </Text>
-
-            <IconButton
-              aria-label="Logout"
-              icon={<HiOutlineX />}
-              borderRadius="full"
-              colorScheme="blue"
-              size="sm"
-              onClick={() => handleNavigate("/app/references")}
-            />
-          </Flex>
+          <PageHeader closeUrl="/app/add" pageTitle="Adicionar Referência" />
 
           <ImageSection image={generalInfo.image} />
 
