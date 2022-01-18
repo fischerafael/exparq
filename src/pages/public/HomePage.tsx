@@ -5,6 +5,7 @@ import { Image } from "@chakra-ui/image";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 
 import brain from "brainjs";
+import { useGetProjectsByUser } from "../../hooks/useGetProjectsByUser";
 
 // "brain.js": "^2.0.0-alpha.12",
 
@@ -24,8 +25,6 @@ export const HomePage = () => {
 
   const result = net.run([0, 0]);
 
-  console.log("RESULT", result);
-
   const onLogin = () => {
     handleLogin()
       .then(() => {
@@ -35,6 +34,10 @@ export const HomePage = () => {
         console.log(e);
       });
   };
+
+  const { projects } = useGetProjectsByUser({});
+
+  console.log("RESULT", result, projects);
 
   return (
     <Flex

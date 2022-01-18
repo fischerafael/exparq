@@ -45,6 +45,7 @@ import { GeneralSection } from "../../../../components/organisms/Projects/Genera
 import { BreadCrumb } from "../../../../components/organisms/BreadCrumb";
 import { breadcrumbs } from "../../../../constants/breadCrumb";
 import { ImageSection } from "../../../../components/organisms/Projects/ImageSection";
+import { useGetProjectsByUser } from "../../../../hooks/useGetProjectsByUser";
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
@@ -80,8 +81,6 @@ export const EditReferencePage = () => {
     userEmail: sessionUserData.email,
   });
 
-  const [projects, setProjects] = useState([] as IProject[]);
-
   const onEditProject = () => {
     api
       .put(`/projects/${id}`, projectData)
@@ -94,21 +93,10 @@ export const EditReferencePage = () => {
       });
   };
 
-  useEffect(() => {
-    (async () => {
-      api
-        .get(
-          `/projects?userId=${sessionUserData.email}&projectType=${projectGetType}`
-        )
-        .then((res) => {
-          const projects = res.data.projects as IProject[];
-          setProjects(projects);
-        })
-        .catch((err) => {
-          console.log("ERROR LOADING REFERENCES", err);
-        });
-    })();
-  }, []);
+  const { projects } = useGetProjectsByUser({
+    userEmail: sessionUserData.email,
+    projectType: projectGetType,
+  });
 
   useEffect(() => {
     if (!id) return;
