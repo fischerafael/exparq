@@ -1,30 +1,10 @@
-import NextLink from "next/link";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-} from "@chakra-ui/breadcrumb";
+import { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
-import { Box, Flex, Text, VStack } from "@chakra-ui/react";
+import { Flex, Text, VStack } from "@chakra-ui/react";
 import { HiOutlineChevronRight, HiOutlineX } from "react-icons/hi";
 import { Header } from "../../../../components/organisms/Header";
 import { AppTemplate } from "../../../../components/templates/AppTemplate";
 import { Button, IconButton } from "@chakra-ui/button";
-import { handleNavigate } from "../../../../utils/handleNavigate";
-import { Image } from "@chakra-ui/image";
-import { Input } from "../../../../components/molecules/Input";
-import { SelectInput } from "../../../../components/molecules/SelectInput";
-import {
-  height,
-  shape,
-  size,
-  complexity,
-  materials,
-  textures,
-  tones,
-  colors,
-} from "../../../../constants/options";
-import { useEffect, useState } from "react";
 
 import { api } from "../../../../services/axios";
 import { useSession } from "../../../../contexts/useSession";
@@ -45,6 +25,7 @@ import { breadcrumbs } from "../../../../constants/breadCrumb";
 import { ImageSection } from "../../../../components/organisms/Projects/ImageSection";
 import { useLoading } from "../../../../hooks/useLoading";
 import { LoadingSpinner } from "../../../../components/organisms/LoadingSpinner";
+import { PageHeader } from "../../../../components/organisms/Projects/PageHeader";
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
@@ -183,26 +164,10 @@ export const EditReferencePage = () => {
           >
             <BreadCrumb items={breadcrumbs.editReferenceBreadCrumb} />
 
-            <Flex
-              w="full"
-              justify="space-between"
-              h="5vh"
-              align="center"
-              color="gray.500"
-            >
-              <Text fontWeight="bold" fontSize="xl" color="gray.900">
-                Editar Referência
-              </Text>
-
-              <IconButton
-                aria-label="Logout"
-                icon={<HiOutlineX />}
-                borderRadius="full"
-                colorScheme="blue"
-                size="sm"
-                onClick={() => handleNavigate("/app/projects")}
-              />
-            </Flex>
+            <PageHeader
+              closeUrl="/app/references"
+              pageTitle="Editar Referência"
+            />
 
             <ImageSection image={generalInfo.image} />
 
