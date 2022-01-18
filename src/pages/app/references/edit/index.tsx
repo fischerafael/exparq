@@ -40,6 +40,8 @@ import { useProjectState } from "../../../../hooks/useProjectState";
 import { Project } from "../../../../services/mongodb/Project";
 import { ColorSection } from "../../../../components/organisms/Projects/ColorSection";
 import { MaterialsSection } from "../../../../components/organisms/Projects/MaterialsSection";
+import { ShapeSection } from "../../../../components/organisms/Projects/ShapeSection";
+import { GeneralSection } from "../../../../components/organisms/Projects/GeneralSection";
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
@@ -279,71 +281,17 @@ export const EditReferencePage = () => {
             />
           </Flex>
 
-          <VStack h="full" w="full" spacing="4" align="flex-start">
-            <Text fontWeight="bold">1. Informações Gerais</Text>
+          <GeneralSection
+            sectionTitle="1. Informações Gerais"
+            state={generalInfo}
+            setState={setGeneralInfo}
+          />
 
-            <Input
-              label="Imagem da Referência (URL)"
-              placeholder="Ex: www.google.com/images/projeto.jpg"
-              value={generalInfo.image}
-              onChange={(e) =>
-                setGeneralInfo({ ...generalInfo, image: e.target.value })
-              }
-            />
-            <Input
-              label="Nome da Referência"
-              placeholder="Ex: Casa 6"
-              value={generalInfo.name}
-              onChange={(e) =>
-                setGeneralInfo({ ...generalInfo, name: e.target.value })
-              }
-            />
-            <Input
-              label="Localização da Referência"
-              placeholder="Ex: Curitiba, Paraná"
-              value={generalInfo.location}
-              onChange={(e) =>
-                setGeneralInfo({ ...generalInfo, location: e.target.value })
-              }
-            />
-          </VStack>
-
-          <VStack h="full" w="full" spacing="4" align="flex-start">
-            <Text fontWeight="bold">2. Forma</Text>
-
-            <SelectInput
-              label="Altura"
-              options={height}
-              value={shapeInfo.height}
-              onChange={(e) =>
-                setShapeInfo({ ...shapeInfo, height: +e.target.value })
-              }
-            />
-            <SelectInput
-              label="Tamanho"
-              options={size}
-              value={shapeInfo.size}
-              onChange={(e) =>
-                setShapeInfo({ ...shapeInfo, size: +e.target.value })
-              }
-            />
-            <SelectInput
-              label="Complexidade Volumétrica"
-              options={complexity}
-              value={shapeInfo.complexity}
-              onChange={(e) =>
-                setShapeInfo({ ...shapeInfo, complexity: +e.target.value })
-              }
-            />
-            <SelectInput
-              label="Formas Dominantes"
-              options={shape}
-              value={shapeInfo.shape}
-              onChange={(e) =>
-                setShapeInfo({ ...shapeInfo, shape: +e.target.value })
-              }
-            />
-          </VStack>
+          <ShapeSection
+            sectionTitle="2. Forma"
+            state={shapeInfo}
+            setState={setShapeInfo}
+          />
 
           <MaterialsSection
             sectionTitle="3. Materiais e Texturas"
