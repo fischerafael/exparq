@@ -4,26 +4,10 @@ import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 
-import brain from "brainjs";
 import { useGetProjectsByUser } from "../../hooks/useGetProjectsByUser";
-
-// "brain.js": "^2.0.0-alpha.12",
 
 export const HomePage = () => {
   const { handleLogin } = useSession();
-
-  const net = new brain.NeuralNetwork({ hiddenLayers: [3] });
-  // lol
-  const trainingData = [
-    { input: [0, 0], output: [0] },
-    { input: [0, 1], output: [1] },
-    { input: [1, 0], output: [1] },
-    { input: [1, 1], output: [0] },
-  ];
-
-  net.train(trainingData);
-
-  const result = net.run([0, 0]);
 
   const onLogin = () => {
     handleLogin()
@@ -36,8 +20,6 @@ export const HomePage = () => {
   };
 
   const { projects } = useGetProjectsByUser({});
-
-  console.log("RESULT", result, projects);
 
   return (
     <Flex

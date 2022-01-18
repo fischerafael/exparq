@@ -46,6 +46,8 @@ import { BreadCrumb } from "../../../../components/organisms/BreadCrumb";
 import { breadcrumbs } from "../../../../constants/breadCrumb";
 import { ImageSection } from "../../../../components/organisms/Projects/ImageSection";
 import { useGetProjectsByUser } from "../../../../hooks/useGetProjectsByUser";
+import { useLoading } from "../../../../hooks/useLoading";
+import { LoadingSpinner } from "../../../../components/organisms/LoadingSpinner";
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
@@ -55,6 +57,8 @@ export const EditReferencePage = () => {
   const { id } = query;
 
   const { sessionUserData } = useSession();
+
+  const [project, setProject] = useState({} as IProject);
   const {
     projectData,
     generalInfo,
@@ -93,10 +97,7 @@ export const EditReferencePage = () => {
       });
   };
 
-  const { projects } = useGetProjectsByUser({
-    userEmail: sessionUserData.email,
-    projectType: projectGetType,
-  });
+  const { isLoading } = useLoading(true, project._id);
 
   useEffect(() => {
     if (!id) return;
@@ -106,6 +107,8 @@ export const EditReferencePage = () => {
         .get(`/projects/${id}`)
         .then((res) => {
           const project = res?.data?.project as IProject;
+
+          setProject(project);
 
           setGeneralInfo({
             image: project.projectURL,
@@ -172,109 +175,113 @@ export const EditReferencePage = () => {
     <AppTemplate
       header={<Header />}
       body={
-        <VStack
-          h="full"
-          spacing="12"
-          justify="flex-start"
-          align="flex-start"
-          w="full"
-        >
-          <Flex
+        isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <VStack
+            h="full"
+            spacing="12"
+            justify="flex-start"
+            align="flex-start"
             w="full"
-            justify="space-between"
-            minH="5vh"
-            align="center"
-            color="gray.500"
           >
-            <BreadCrumb items={breadcrumbs.editReferenceBreadCrumb} />
-          </Flex>
-
-          <Flex
-            w="full"
-            justify="space-between"
-            h="5vh"
-            align="center"
-            color="gray.500"
-          >
-            <Text fontWeight="bold" fontSize="xl" color="gray.900">
-              Editar Referência
-            </Text>
-
-            <IconButton
-              aria-label="Logout"
-              icon={<HiOutlineX />}
-              borderRadius="full"
-              colorScheme="blue"
-              size="sm"
-              onClick={() => handleNavigate("/app/projects")}
-            />
-          </Flex>
-
-          <ImageSection image={generalInfo.image} />
-
-          <GeneralSection
-            sectionTitle="1. Informações Gerais"
-            state={generalInfo}
-            setState={setGeneralInfo}
-          />
-
-          <ShapeSection
-            sectionTitle="2. Forma"
-            state={shapeInfo}
-            setState={setShapeInfo}
-          />
-
-          <MaterialsSection
-            sectionTitle="3. Materiais e Texturas"
-            state={materialsAndContrast}
-            setState={setMaterialsAndContrast}
-          />
-
-          <ColorSection
-            sectionTitle="4. Cores"
-            state={colorsInfo}
-            setState={setColorsInfo}
-          />
-
-          <LightSection
-            sectionTitle="5. Iluminação"
-            state={lightInfo}
-            setState={setLightInfo}
-          />
-
-          <UsersSection
-            sectionTitle="6. Usuários"
-            state={usersInfo}
-            setState={setUsersInfo}
-          />
-
-          <ContextSection
-            sectionTitle="7. Contexto"
-            state={contextInfo}
-            setState={setContextInfo}
-          />
-
-          <TimeSection
-            sectionTitle="8. Tempo"
-            state={timeInfo}
-            setState={setTimeInfo}
-          />
-
-          <Flex w="full" minH="5vh" justify="flex-end">
-            <Button
-              borderRadius="sm"
-              colorScheme="blue"
-              size="lg"
-              variant="solid"
-              onClick={onEditProject}
-              isDisabled={isDisabled}
+            <Flex
+              w="full"
+              justify="space-between"
+              minH="5vh"
+              align="center"
+              color="gray.500"
             >
-              Salvar
-            </Button>
-          </Flex>
+              <BreadCrumb items={breadcrumbs.editReferenceBreadCrumb} />
+            </Flex>
 
-          <Flex w="full" minH="5vh" />
-        </VStack>
+            <Flex
+              w="full"
+              justify="space-between"
+              h="5vh"
+              align="center"
+              color="gray.500"
+            >
+              <Text fontWeight="bold" fontSize="xl" color="gray.900">
+                Editar Referência
+              </Text>
+
+              <IconButton
+                aria-label="Logout"
+                icon={<HiOutlineX />}
+                borderRadius="full"
+                colorScheme="blue"
+                size="sm"
+                onClick={() => handleNavigate("/app/projects")}
+              />
+            </Flex>
+
+            <ImageSection image={generalInfo.image} />
+
+            <GeneralSection
+              sectionTitle="1. Informações Gerais"
+              state={generalInfo}
+              setState={setGeneralInfo}
+            />
+
+            <ShapeSection
+              sectionTitle="2. Forma"
+              state={shapeInfo}
+              setState={setShapeInfo}
+            />
+
+            <MaterialsSection
+              sectionTitle="3. Materiais e Texturas"
+              state={materialsAndContrast}
+              setState={setMaterialsAndContrast}
+            />
+
+            <ColorSection
+              sectionTitle="4. Cores"
+              state={colorsInfo}
+              setState={setColorsInfo}
+            />
+
+            <LightSection
+              sectionTitle="5. Iluminação"
+              state={lightInfo}
+              setState={setLightInfo}
+            />
+
+            <UsersSection
+              sectionTitle="6. Usuários"
+              state={usersInfo}
+              setState={setUsersInfo}
+            />
+
+            <ContextSection
+              sectionTitle="7. Contexto"
+              state={contextInfo}
+              setState={setContextInfo}
+            />
+
+            <TimeSection
+              sectionTitle="8. Tempo"
+              state={timeInfo}
+              setState={setTimeInfo}
+            />
+
+            <Flex w="full" minH="5vh" justify="flex-end">
+              <Button
+                borderRadius="sm"
+                colorScheme="blue"
+                size="lg"
+                variant="solid"
+                onClick={onEditProject}
+                isDisabled={isDisabled}
+              >
+                Salvar
+              </Button>
+            </Flex>
+
+            <Flex w="full" minH="5vh" />
+          </VStack>
+        )
       }
     />
   );

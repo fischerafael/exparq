@@ -20,6 +20,8 @@ import { useSession } from "../../../contexts/useSession";
 import { Image } from "@chakra-ui/image";
 import { ProjectCard } from "../../../components/organisms/Projects/ProjectCard";
 import { useRouter } from "next/router";
+import { useLoading } from "../../../hooks/useLoading";
+import { LoadingSpinner } from "../../../components/organisms/LoadingSpinner";
 
 interface IProject {
   _id?: string;
@@ -60,8 +62,7 @@ export const ReferencesPage = () => {
   const { sessionUserData } = useSession();
 
   const [projects, setProjects] = useState<IProject[]>([]);
-
-  console.log("PROJECTS STATE", projects);
+  const { isLoading, setLoading } = useLoading(true, projects);
 
   useEffect(() => {
     api
@@ -96,70 +97,74 @@ export const ReferencesPage = () => {
     <AppTemplate
       header={<Header />}
       body={
-        <VStack
-          h="full"
-          spacing="8"
-          justify="flex-start"
-          align="flex-start"
-          w="full"
-        >
-          <Flex
+        isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <VStack
+            h="full"
+            spacing="8"
+            justify="flex-start"
+            align="flex-start"
             w="full"
-            justify="space-between"
-            h="5vh"
-            align="center"
-            color="gray.500"
           >
-            <Breadcrumb separator={<HiOutlineChevronRight />}>
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app">
-                  App
-                </BreadcrumbLink>
-              </BreadcrumbItem>
+            <Flex
+              w="full"
+              justify="space-between"
+              h="5vh"
+              align="center"
+              color="gray.500"
+            >
+              <Breadcrumb separator={<HiOutlineChevronRight />}>
+                <BreadcrumbItem>
+                  <BreadcrumbLink as={NextLink} href="/app">
+                    App
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
 
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app/references">
-                  Referências
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            </Breadcrumb>
-          </Flex>
+                <BreadcrumbItem>
+                  <BreadcrumbLink as={NextLink} href="/app/references">
+                    Referências
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </Breadcrumb>
+            </Flex>
 
-          <Flex
-            w="full"
-            justify="space-between"
-            h="5vh"
-            align="center"
-            color="gray.500"
-          >
-            <Text fontWeight="bold" fontSize="xl" color="gray.900">
-              Referências
-            </Text>
+            <Flex
+              w="full"
+              justify="space-between"
+              h="5vh"
+              align="center"
+              color="gray.500"
+            >
+              <Text fontWeight="bold" fontSize="xl" color="gray.900">
+                Referências
+              </Text>
 
-            <IconButton
-              aria-label="Logout"
-              icon={<HiOutlinePlus />}
-              borderRadius="full"
-              colorScheme="blue"
-              size="sm"
-              onClick={() => handleNavigate("/app/references/add")}
-            />
-          </Flex>
-
-          <VStack w="full" spacing="8">
-            {projects.map((project) => (
-              <ProjectCard
-                projectType="Referência"
-                projectName={project.projectName}
-                projectLocation={project.projectLocation}
-                projectURL={project.projectURL}
-                key={project._id}
-                onRemove={() => onRemove(project._id!)}
-                onClick={() => onNavigate(project._id!)}
+              <IconButton
+                aria-label="Logout"
+                icon={<HiOutlinePlus />}
+                borderRadius="full"
+                colorScheme="blue"
+                size="sm"
+                onClick={() => handleNavigate("/app/references/add")}
               />
-            ))}
+            </Flex>
+
+            <VStack w="full" spacing="8">
+              {projects.map((project) => (
+                <ProjectCard
+                  projectType="Referência"
+                  projectName={project.projectName}
+                  projectLocation={project.projectLocation}
+                  projectURL={project.projectURL}
+                  key={project._id}
+                  onRemove={() => onRemove(project._id!)}
+                  onClick={() => onNavigate(project._id!)}
+                />
+              ))}
+            </VStack>
           </VStack>
-        </VStack>
+        )
       }
     />
   );
