@@ -36,6 +36,7 @@ import { predictXP } from "../../../../utils/ml";
 import { IProject } from "../../../../interfaces/IProject";
 import { useIsDisabled } from "../../../../hooks/useIsDisabled";
 import { useProjectState } from "../../../../hooks/useProjectState";
+import { ImageSection } from "../../../../components/organisms/Projects/ImageSection";
 
 export const AddProjectPage = () => {
   const projectCreationType = "project";
@@ -196,14 +197,7 @@ export const AddProjectPage = () => {
             />
           </Flex>
 
-          <Flex w="full" h="40vh">
-            <Image
-              alt="Image"
-              src={generalInfo.image}
-              fallbackSrc="/no_image.jpg"
-              objectFit="cover"
-            />
-          </Flex>
+          <ImageSection image={generalInfo.image} />
 
           <VStack h="full" w="full" spacing="4" align="flex-start">
             <Text fontWeight="bold">1. Informações Gerais</Text>

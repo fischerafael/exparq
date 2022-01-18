@@ -33,6 +33,7 @@ import { LightSection } from "../../../../components/organisms/Projects/LightSec
 import { api } from "../../../../services/axios";
 import { useSession } from "../../../../contexts/useSession";
 import { useIsDisabled } from "../../../../hooks/useIsDisabled";
+import { ImageSection } from "../../../../components/organisms/Projects/ImageSection";
 
 export const AddReferencePage = () => {
   const projectType = "reference";
@@ -195,14 +196,7 @@ export const AddReferencePage = () => {
             />
           </Flex>
 
-          <Flex w="full" h="40vh">
-            <Image
-              alt="Image"
-              src={generalInfo.image}
-              fallbackSrc="/no_image.jpg"
-              objectFit="cover"
-            />
-          </Flex>
+          <ImageSection image={generalInfo.image} />
 
           <VStack h="full" w="full" spacing="4" align="flex-start">
             <Text fontWeight="bold">1. Informações Gerais</Text>

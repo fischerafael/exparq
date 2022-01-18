@@ -40,6 +40,7 @@ import { useProjectState } from "../../../../hooks/useProjectState";
 import { Project } from "../../../../services/mongodb/Project";
 import { useLoading } from "../../../../hooks/useLoading";
 import { LoadingSpinner } from "../../../../components/organisms/LoadingSpinner";
+import { ImageSection } from "../../../../components/organisms/Projects/ImageSection";
 
 export const EditProjectPage = () => {
   const projectCreationType = "project";
@@ -278,14 +279,7 @@ export const EditProjectPage = () => {
               />
             </Flex>
 
-            <Flex w="full" h="40vh">
-              <Image
-                alt="Image"
-                src={generalInfo.image}
-                fallbackSrc="/no_image.jpg"
-                objectFit="cover"
-              />
-            </Flex>
+            <ImageSection image={generalInfo.image} />
 
             <VStack h="full" w="full" spacing="4" align="flex-start">
               <Text fontWeight="bold">1. Informações Gerais</Text>

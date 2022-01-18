@@ -185,15 +185,7 @@ export const EditReferencePage = () => {
             align="flex-start"
             w="full"
           >
-            <Flex
-              w="full"
-              justify="space-between"
-              minH="5vh"
-              align="center"
-              color="gray.500"
-            >
-              <BreadCrumb items={breadcrumbs.editReferenceBreadCrumb} />
-            </Flex>
+            <BreadCrumb items={breadcrumbs.editReferenceBreadCrumb} />
 
             <Flex
               w="full"
