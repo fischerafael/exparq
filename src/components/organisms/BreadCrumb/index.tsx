@@ -19,8 +19,8 @@ export const BreadCrumb = ({ items }: Props) => {
   return (
     <ChakraBreadCrumb separator={<HiOutlineChevronRight />}>
       {items?.map((item) => (
-        <BreadcrumbItem>
-          <BreadcrumbLink key={item.href} as={NextLink} href={item.href}>
+        <BreadcrumbItem key={item.href}>
+          <BreadcrumbLink as={NextLink} href={item.href}>
             {item.label}
           </BreadcrumbLink>
         </BreadcrumbItem>
