@@ -43,6 +43,8 @@ import { MaterialsSection } from "../../../../components/organisms/Projects/Mate
 import { ShapeSection } from "../../../../components/organisms/Projects/ShapeSection";
 import { GeneralSection } from "../../../../components/organisms/Projects/GeneralSection";
 import { BreadCrumb } from "../../../../components/organisms/BreadCrumb";
+import { breadcrumbs } from "../../../../constants/breadCrumb";
+import { ImageSection } from "../../../../components/organisms/Projects/ImageSection";
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
@@ -176,33 +178,7 @@ export const EditReferencePage = () => {
     })();
   }, [id]);
 
-  useEffect(() => {
-    if (!projects.length) return;
-
-    const { result } = predictXP({
-      trainingData: projects,
-      predict: projectData,
-    });
-
-    setXPInfo({ ...XPInfo, predicted: result });
-  }, [
-    shapeInfo,
-    materialsAndContrast,
-    colorsInfo,
-    lightInfo,
-    usersInfo,
-    contextInfo,
-    timeInfo,
-    projects,
-  ]);
-
   const { isDisabled } = useIsDisabled(generalInfo);
-
-  const breadCrumb = [
-    { href: "/app", label: "App" },
-    { href: "/app/references", label: "Referências" },
-    { href: "/app/references/edit", label: "Editar" },
-  ];
 
   return (
     <AppTemplate
@@ -222,7 +198,7 @@ export const EditReferencePage = () => {
             align="center"
             color="gray.500"
           >
-            <BreadCrumb items={breadCrumb} />
+            <BreadCrumb items={breadcrumbs.editReferenceBreadCrumb} />
           </Flex>
 
           <Flex
@@ -246,14 +222,7 @@ export const EditReferencePage = () => {
             />
           </Flex>
 
-          <Flex w="full" h="40vh">
-            <Image
-              alt="Image"
-              src={generalInfo.image}
-              fallbackSrc="/no_image.jpg"
-              objectFit="cover"
-            />
-          </Flex>
+          <ImageSection image={generalInfo.image} />
 
           <GeneralSection
             sectionTitle="1. Informações Gerais"
