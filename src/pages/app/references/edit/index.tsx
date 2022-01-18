@@ -42,6 +42,7 @@ import { ColorSection } from "../../../../components/organisms/Projects/ColorSec
 import { MaterialsSection } from "../../../../components/organisms/Projects/MaterialsSection";
 import { ShapeSection } from "../../../../components/organisms/Projects/ShapeSection";
 import { GeneralSection } from "../../../../components/organisms/Projects/GeneralSection";
+import { BreadCrumb } from "../../../../components/organisms/BreadCrumb";
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
@@ -197,6 +198,12 @@ export const EditReferencePage = () => {
 
   const { isDisabled } = useIsDisabled(generalInfo);
 
+  const breadCrumb = [
+    { href: "/app", label: "App" },
+    { href: "/app/references", label: "Referências" },
+    { href: "/app/references/edit", label: "Editar" },
+  ];
+
   return (
     <AppTemplate
       header={<Header />}
@@ -215,40 +222,7 @@ export const EditReferencePage = () => {
             align="center"
             color="gray.500"
           >
-            <Box
-              position="absolute"
-              bg="white"
-              shadow="xl"
-              zIndex="10"
-              bottom="4"
-              left="4"
-              p="8"
-              border="1px"
-              borderColor="gray.200"
-            >
-              <Text fontSize="xs">XP Prevista</Text>
-
-              <Text fontSize="xl">{emoji}</Text>
-            </Box>
-            <Breadcrumb separator={<HiOutlineChevronRight />}>
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app">
-                  App
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app/references">
-                  Referências
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app/references/edit">
-                  Editar
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            </Breadcrumb>
+            <BreadCrumb items={breadCrumb} />
           </Flex>
 
           <Flex
