@@ -3,7 +3,6 @@ import { Flex, Text, VStack } from "@chakra-ui/react";
 import { Header } from "../../../../components/organisms/Header";
 import { AppTemplate } from "../../../../components/templates/AppTemplate";
 import { Button } from "@chakra-ui/button";
-import { useState } from "react";
 
 import { UsersSection } from "../../../../components/organisms/Projects/UsersSection";
 import { ContextSection } from "../../../../components/organisms/Projects/ContextSection";
@@ -20,62 +19,33 @@ import { GeneralSection } from "../../../../components/organisms/Projects/Genera
 import { ShapeSection } from "../../../../components/organisms/Projects/ShapeSection";
 import { MaterialsSection } from "../../../../components/organisms/Projects/MaterialsSection";
 import { ColorSection } from "../../../../components/organisms/Projects/ColorSection";
+import { useProjectState } from "../../../../hooks/useProjectState";
 
 export const AddReferencePage = () => {
   const projectType = "reference";
   const { sessionUserData } = useSession();
 
-  const [generalInfo, setGeneralInfo] = useState({
-    image: "",
-    name: "",
-    location: "",
-  });
-
-  const [shapeInfo, setShapeInfo] = useState({
-    height: 0,
-    size: 0,
-    complexity: 0,
-    shape: 0,
-  });
-
-  const [materialsAndContrast, setMaterialsAndContrast] = useState({
-    materials: 0,
-    texture: 0,
-  });
-
-  const [colorsInfo, setColorsInfo] = useState({
-    tone: 0,
-    primaryColor: 0,
-    secondaryColor: 0,
-    tertiaryColor: 0,
-  });
-
-  const [lightInfo, setLightInfo] = useState({
-    intensity: 0,
-    open: 0,
-    contrast: 0,
-  });
-
-  const [usersInfo, setUsersInfo] = useState({
-    quantity: 0,
-    movement: 0,
-  });
-
-  const [contextInfo, setContextInfo] = useState({
-    type: 0,
-    isProjectLandmark: 0,
-    isContextLandmark: 0,
-  });
-
-  const [timeInfo, setTimeInfo] = useState({
-    timeOfDay: 0,
-    weather: 0,
-    temperature: 0,
-  });
-
-  const [XPInfo, setXPInfo] = useState({
-    perceived: 0,
-    predicted: 0,
+  const {
+    generalInfo,
+    setGeneralInfo,
+    shapeInfo,
+    setShapeInfo,
+    materialsAndContrast,
+    setMaterialsAndContrast,
+    colorsInfo,
+    setColorsInfo,
+    lightInfo,
+    setLightInfo,
+    usersInfo,
+    setUsersInfo,
+    contextInfo,
+    setContextInfo,
+    timeInfo,
+    setTimeInfo,
+    XPInfo,
+  } = useProjectState({
+    projectCreationType: projectType,
+    userEmail: sessionUserData.email,
   });
 
   const { isDisabled } = useIsDisabled(generalInfo);

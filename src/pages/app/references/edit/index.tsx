@@ -29,11 +29,10 @@ import { PageHeader } from "../../../../components/organisms/Projects/PageHeader
 
 export const EditReferencePage = () => {
   const projectEditionType = "reference";
+  const { sessionUserData } = useSession();
 
   const { query } = useRouter();
   const { id } = query;
-
-  const { sessionUserData } = useSession();
 
   const [project, setProject] = useState({} as IProject);
   const {
@@ -54,9 +53,7 @@ export const EditReferencePage = () => {
     setContextInfo,
     timeInfo,
     setTimeInfo,
-    XPInfo,
     setXPInfo,
-    emoji,
   } = useProjectState({
     projectCreationType: projectEditionType,
     userEmail: sessionUserData.email,
