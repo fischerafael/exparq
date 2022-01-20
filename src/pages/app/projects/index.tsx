@@ -11,35 +11,19 @@ import { Header } from "../../../components/organisms/Header";
 import { AppTemplate } from "../../../components/templates/AppTemplate";
 import { IconButton } from "@chakra-ui/button";
 import { handleNavigate } from "../../../utils/handleNavigate";
-import { useEffect, useState } from "react";
 import { api } from "../../../services/axios";
 import { useSession } from "../../../contexts/useSession";
 import { ProjectCard } from "../../../components/organisms/Projects/ProjectCard";
-import { IProject } from "../../../interfaces/IProject";
+import { useGetProjectsByUser } from "../../../hooks/useGetProjectsByUser";
+import { LoadingSpinner } from "../../../components/organisms/LoadingSpinner";
 
 export const ProjectsPage = () => {
   const projectType = "project";
   const { push } = useRouter();
 
-  const { sessionUserData } = useSession();
-
-  const [projects, setProjects] = useState<IProject[]>([]);
-
-  console.log("PROJECTS STATE", projects);
-
-  useEffect(() => {
-    api
-      .get(
-        `/projects?userId=${sessionUserData.email}&projectType=${projectType}`
-      )
-      .then((res) => {
-        const projects = res.data.projects as IProject[];
-        setProjects(projects);
-      })
-      .catch((err) => {
-        console.log("ERROR LOADING PROJECTS", err);
-      });
-  }, []);
+  const { projects, setProjects, isLoading } = useGetProjectsByUser({
+    projectType,
+  });
 
   const onRemove = (projectId: string) => {
     api
@@ -60,71 +44,75 @@ export const ProjectsPage = () => {
     <AppTemplate
       header={<Header />}
       body={
-        <VStack
-          h="full"
-          spacing="8"
-          justify="flex-start"
-          align="flex-start"
-          w="full"
-        >
-          <Flex
+        isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <VStack
+            h="full"
+            spacing="8"
+            justify="flex-start"
+            align="flex-start"
             w="full"
-            justify="space-between"
-            h="5vh"
-            align="center"
-            color="gray.500"
           >
-            <Breadcrumb separator={<HiOutlineChevronRight />}>
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app">
-                  App
-                </BreadcrumbLink>
-              </BreadcrumbItem>
+            <Flex
+              w="full"
+              justify="space-between"
+              h="5vh"
+              align="center"
+              color="gray.500"
+            >
+              <Breadcrumb separator={<HiOutlineChevronRight />}>
+                <BreadcrumbItem>
+                  <BreadcrumbLink as={NextLink} href="/app">
+                    App
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
 
-              <BreadcrumbItem>
-                <BreadcrumbLink as={NextLink} href="/app/projects">
-                  Projetos
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            </Breadcrumb>
-          </Flex>
+                <BreadcrumbItem>
+                  <BreadcrumbLink as={NextLink} href="/app/projects">
+                    Projetos
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </Breadcrumb>
+            </Flex>
 
-          <Flex
-            w="full"
-            justify="space-between"
-            h="5vh"
-            align="center"
-            color="gray.500"
-          >
-            <Text fontWeight="bold" fontSize="xl" color="gray.900">
-              Projetos
-            </Text>
+            <Flex
+              w="full"
+              justify="space-between"
+              h="5vh"
+              align="center"
+              color="gray.500"
+            >
+              <Text fontWeight="bold" fontSize="xl" color="gray.900">
+                Projetos
+              </Text>
 
-            <IconButton
-              aria-label="Logout"
-              icon={<HiOutlinePlus />}
-              borderRadius="full"
-              colorScheme="blue"
-              size="sm"
-              onClick={() => handleNavigate("/app/projects/add")}
-            />
-          </Flex>
-
-          <VStack w="full" spacing="8">
-            {projects.map((project) => (
-              <ProjectCard
-                projectType="Referência"
-                projectName={project.projectName}
-                projectLocation={project.projectLocation}
-                projectURL={project.projectURL}
-                predictedXP={project.projectXPPredicted}
-                key={project._id}
-                onRemove={() => onRemove(project._id!)}
-                onClick={() => onNavigate(project._id!)}
+              <IconButton
+                aria-label="Logout"
+                icon={<HiOutlinePlus />}
+                borderRadius="full"
+                colorScheme="blue"
+                size="sm"
+                onClick={() => handleNavigate("/app/projects/add")}
               />
-            ))}
+            </Flex>
+
+            <VStack w="full" spacing="8">
+              {projects.map((project) => (
+                <ProjectCard
+                  projectType="Referência"
+                  projectName={project.projectName}
+                  projectLocation={project.projectLocation}
+                  projectURL={project.projectURL}
+                  predictedXP={project.projectXPPredicted}
+                  key={project._id}
+                  onRemove={() => onRemove(project._id!)}
+                  onClick={() => onNavigate(project._id!)}
+                />
+              ))}
+            </VStack>
           </VStack>
-        </VStack>
+        )
       }
     />
   );
