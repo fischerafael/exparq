@@ -16,22 +16,13 @@ export const AppPage = () => {
 
   const { sessionUserData } = useSession();
 
-  const { projects } = useGetProjectsByUser({
+  const { projects, isLoading } = useGetProjectsByUser({
     userEmail: sessionUserData.email,
     projectType: projectType,
   });
-  const { isLoading, setLoading } = useLoading(true);
 
   const isEvaluationDisabled = projects.length < 1 ? true : false;
   const isProjectDisabled = projects.length < 3 ? true : false;
-
-  useEffect(() => {
-    if (!projects) {
-      setLoading(true);
-      return;
-    }
-    setLoading(false);
-  }, [projects]);
 
   return (
     <AppTemplate

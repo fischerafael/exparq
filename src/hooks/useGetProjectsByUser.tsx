@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IProject } from "../interfaces/IProject";
 import { api } from "../services/axios";
+import { useLoading } from "./useLoading";
 
 interface Props {
   userEmail?: string;
@@ -8,6 +9,8 @@ interface Props {
 }
 
 export const useGetProjectsByUser = ({ userEmail, projectType }: Props) => {
+  const { isLoading, setLoading } = useLoading(true);
+
   const [projects, setProjects] = useState([] as IProject[]);
 
   const DEFAULT_EMAIL = "wakeup";
@@ -27,9 +30,12 @@ export const useGetProjectsByUser = ({ userEmail, projectType }: Props) => {
         })
         .catch((err) => {
           console.log("ERROR LOADING REFERENCES", err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     })();
   }, [userEmail, projectType]);
 
-  return { projects, setProjects };
+  return { projects, setProjects, isLoading };
 };
