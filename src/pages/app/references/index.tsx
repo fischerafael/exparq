@@ -14,48 +14,12 @@ import { Header } from "../../../components/organisms/Header";
 import { AppTemplate } from "../../../components/templates/AppTemplate";
 import { IconButton } from "@chakra-ui/button";
 import { handleNavigate } from "../../../utils/handleNavigate";
-import { useEffect, useState } from "react";
 import { api } from "../../../services/axios";
-import { useSession } from "../../../contexts/useSession";
-import { Image } from "@chakra-ui/image";
 import { ProjectCard } from "../../../components/organisms/Projects/ProjectCard";
 import { useRouter } from "next/router";
-import { useLoading } from "../../../hooks/useLoading";
 import { LoadingSpinner } from "../../../components/organisms/LoadingSpinner";
 import { useToats } from "../../../hooks/useToast";
 import { useGetProjectsByUser } from "../../../hooks/useGetProjectsByUser";
-
-interface IProject {
-  _id?: string;
-  projectColorPrimaryColor: number;
-  projectColorSecondaryColor: number;
-  projectColorTertiaryColor: number;
-  projectColorTone: number;
-  projectComplexity: number;
-  projectContextIsContextLandmark: number;
-  projectContextIsProjectLandmark: number;
-  projectContextType: number;
-  projectHeight: number;
-  projectLightContrast: number;
-  projectLightIntensity: number;
-  projectLightOpen: number;
-  projectLocation: string;
-  projectMaterials: number;
-  projectName: string;
-  projectShape: number;
-  projectSize: number;
-  projectTemperature: number;
-  projectTexture: number;
-  projectTimeOfDay: number;
-  projectType: string;
-  projectURL: string;
-  projectUsersMovement: number;
-  projectUsersQuantity: number;
-  projectWeather: number;
-  projectXPPerceived: number;
-  projectXPPredicted: number;
-  userId: string;
-}
 
 export const ReferencesPage = () => {
   const projectType = "reference";
