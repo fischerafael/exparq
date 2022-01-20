@@ -1,7 +1,7 @@
 import { handleNavigate } from "../../utils/handleNavigate";
 import { useSession } from "../../contexts/useSession";
 import { Text, VStack } from "@chakra-ui/layout";
-import { Button } from "@chakra-ui/react";
+import { Button, SimpleGrid } from "@chakra-ui/react";
 import { HiOutlineChevronRight } from "react-icons/hi";
 
 import { Header } from "../../components/organisms/Header";

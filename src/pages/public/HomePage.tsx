@@ -5,6 +5,7 @@ import { Image } from "@chakra-ui/image";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 
 import { useGetProjectsByUser } from "../../hooks/useGetProjectsByUser";
+import { MenuCards } from "../../components/organisms/MenuCards";
 
 export const HomePage = () => {
   const { handleLogin } = useSession();
@@ -29,7 +30,9 @@ export const HomePage = () => {
       textAlign="center"
       color="gray.900"
     >
-      <VStack w="full" maxW="lg" bg="white" px="8">
+      <VStack w="full" maxW="container.md" bg="white" px="8">
+        <MenuCards />
+
         <Flex h="15vh" align="center">
           <Image src="/logo-black.svg" alt="UXArch" />
         </Flex>
