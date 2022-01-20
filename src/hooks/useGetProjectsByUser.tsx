@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { IProject } from "../interfaces/IProject";
 import { api } from "../services/axios";
 import { useLoading } from "./useLoading";
+import { useSession } from "../contexts/useSession";
 
 interface Props {
-  userEmail?: string;
   projectType?: "reference" | "project";
 }
 
-export const useGetProjectsByUser = ({ userEmail, projectType }: Props) => {
+export const useGetProjectsByUser = ({ projectType }: Props) => {
+  const { sessionUserData } = useSession();
   const { isLoading, setLoading } = useLoading(true);
 
   const [projects, setProjects] = useState([] as IProject[]);
@@ -20,9 +21,9 @@ export const useGetProjectsByUser = ({ userEmail, projectType }: Props) => {
     (async () => {
       api
         .get(
-          `/projects?userId=${userEmail || DEFAULT_EMAIL}&projectType=${
-            projectType || DEFAULT_PROJECT_TYPE
-          }`
+          `/projects?userId=${
+            sessionUserData.email || DEFAULT_EMAIL
+          }&projectType=${projectType || DEFAULT_PROJECT_TYPE}`
         )
         .then((res) => {
           const projects = res.data.projects as IProject[];
@@ -35,7 +36,7 @@ export const useGetProjectsByUser = ({ userEmail, projectType }: Props) => {
           setLoading(false);
         });
     })();
-  }, [userEmail, projectType]);
+  }, [sessionUserData, projectType]);
 
   return { projects, setProjects, isLoading };
 };
