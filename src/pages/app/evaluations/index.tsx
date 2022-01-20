@@ -1,16 +1,11 @@
-import NextLink from "next/link";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-} from "@chakra-ui/breadcrumb";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
-import { HiOutlineChevronRight } from "react-icons/hi";
 import { Header } from "../../../components/organisms/Header";
 import { AppTemplate } from "../../../components/templates/AppTemplate";
 import { ProjectEvaluationCard } from "./components/ProjectEvaluationCard";
 import { useGetProjectsByUser } from "../../../hooks/useGetProjectsByUser";
 import { LoadingSpinner } from "../../../components/organisms/LoadingSpinner";
+import { BreadCrumb } from "../../../components/organisms/BreadCrumb";
+import { breadcrumbs } from "../../../constants/breadCrumb";
 
 export const EvaluationsPage = () => {
   const projectType = "reference";
@@ -33,27 +28,7 @@ export const EvaluationsPage = () => {
             align="flex-start"
             w="full"
           >
-            <Flex
-              w="full"
-              justify="space-between"
-              h="5vh"
-              align="center"
-              color="gray.500"
-            >
-              <Breadcrumb separator={<HiOutlineChevronRight />}>
-                <BreadcrumbItem>
-                  <BreadcrumbLink as={NextLink} href="/app">
-                    App
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem>
-                  <BreadcrumbLink as={NextLink} href="/app/evaluations">
-                    Avaliações
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </Breadcrumb>
-            </Flex>
+            <BreadCrumb items={breadcrumbs.evaluationPageBreadCrumb} />
 
             <Flex
               w="full"
