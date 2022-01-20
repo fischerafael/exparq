@@ -23,6 +23,7 @@ import { useRouter } from "next/router";
 import { useLoading } from "../../../hooks/useLoading";
 import { LoadingSpinner } from "../../../components/organisms/LoadingSpinner";
 import { useToats } from "../../../hooks/useToast";
+import { useGetProjectsByUser } from "../../../hooks/useGetProjectsByUser";
 
 interface IProject {
   _id?: string;
@@ -61,24 +62,9 @@ export const ReferencesPage = () => {
   const { push } = useRouter();
   const { onSuccess, onError } = useToats();
 
-  const { sessionUserData } = useSession();
-
-  const [projects, setProjects] = useState<IProject[]>([]);
-  const { isLoading, setLoading } = useLoading(true, projects);
-
-  useEffect(() => {
-    api
-      .get(
-        `/projects?userId=${sessionUserData.email}&projectType=${projectType}`
-      )
-      .then((res) => {
-        const projects = res.data.projects as IProject[];
-        setProjects(projects);
-      })
-      .catch((err) => {
-        console.log("ERROR LOADING REFERENCES", err);
-      });
-  }, []);
+  const { projects, setProjects, isLoading } = useGetProjectsByUser({
+    projectType,
+  });
 
   const onRemove = (projectId: string) => {
     api
