@@ -17,7 +17,7 @@ export const AppTemplate = ({ header, body }: Props) => {
       position="relative"
     >
       <Flex justify="center" minH="10vh" w="full" shadow="xs" zIndex="10">
-        <Flex w="full" h="full" maxW="lg" px="4">
+        <Flex w="full" h="full" maxW="container.md" px="4">
           {header}
         </Flex>
       </Flex>
@@ -41,7 +41,7 @@ export const AppTemplate = ({ header, body }: Props) => {
           },
         }}
       >
-        <VStack w="full" h="full" maxW="lg" p="4">
+        <VStack w="full" h="full" maxW="container.md" p="4">
           {body}
         </VStack>
       </Flex>
