@@ -17,7 +17,6 @@ export const AppPage = () => {
   const { sessionUserData } = useSession();
 
   const { projects, isLoading } = useGetProjectsByUser({
-    userEmail: sessionUserData.email,
     projectType: projectType,
   });
 
