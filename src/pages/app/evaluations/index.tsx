@@ -42,7 +42,7 @@ export const EvaluationsPage = () => {
               </Text>
             </Flex>
 
-            <SimpleGrid w="full" gap="8" columns={[1, 1, 1, 2]}>
+            <SimpleGrid w="full" gap="8" columns={[1, 1, 2]}>
               {projects.map((project) => (
                 <ProjectEvaluationCard
                   projectType="Referência"

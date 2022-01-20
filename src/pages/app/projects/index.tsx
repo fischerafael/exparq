@@ -3,7 +3,8 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-} from "@chakra-ui/breadcrumb";
+  SimpleGrid,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 import { HiOutlineChevronRight, HiOutlinePlus } from "react-icons/hi";
@@ -97,7 +98,7 @@ export const ProjectsPage = () => {
               />
             </Flex>
 
-            <VStack w="full" spacing="8">
+            <SimpleGrid w="full" gap="8" columns={[1, 1, 2]}>
               {projects.map((project) => (
                 <ProjectCard
                   projectType="Referência"
@@ -110,7 +111,7 @@ export const ProjectsPage = () => {
                   onClick={() => onNavigate(project._id!)}
                 />
               ))}
-            </VStack>
+            </SimpleGrid>
           </VStack>
         )
       }
