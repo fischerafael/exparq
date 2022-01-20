@@ -1,15 +1,6 @@
-import NextLink from "next/link";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-} from "@chakra-ui/breadcrumb";
+import { SimpleGrid } from "@chakra-ui/react";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
-import {
-  HiOutlineChevronRight,
-  HiOutlinePlus,
-  HiOutlineTrash,
-} from "react-icons/hi";
+import { HiOutlinePlus } from "react-icons/hi";
 import { Header } from "../../../components/organisms/Header";
 import { AppTemplate } from "../../../components/templates/AppTemplate";
 import { IconButton } from "@chakra-ui/button";
@@ -20,6 +11,8 @@ import { useRouter } from "next/router";
 import { LoadingSpinner } from "../../../components/organisms/LoadingSpinner";
 import { useToats } from "../../../hooks/useToast";
 import { useGetProjectsByUser } from "../../../hooks/useGetProjectsByUser";
+import { BreadCrumb } from "../../../components/organisms/BreadCrumb";
+import { breadcrumbs } from "../../../constants/breadCrumb";
 
 export const ReferencesPage = () => {
   const projectType = "reference";
@@ -60,27 +53,7 @@ export const ReferencesPage = () => {
             align="flex-start"
             w="full"
           >
-            <Flex
-              w="full"
-              justify="space-between"
-              h="5vh"
-              align="center"
-              color="gray.500"
-            >
-              <Breadcrumb separator={<HiOutlineChevronRight />}>
-                <BreadcrumbItem>
-                  <BreadcrumbLink as={NextLink} href="/app">
-                    App
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem>
-                  <BreadcrumbLink as={NextLink} href="/app/references">
-                    Referências
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </Breadcrumb>
-            </Flex>
+            <BreadCrumb items={breadcrumbs.referencesPageBreadCrumb} />
 
             <Flex
               w="full"
@@ -103,7 +76,7 @@ export const ReferencesPage = () => {
               />
             </Flex>
 
-            <VStack w="full" spacing="8">
+            <SimpleGrid w="full" gap="8" columns={[1, 1, 2]}>
               {projects.map((project) => (
                 <ProjectCard
                   projectType="Referência"
@@ -115,7 +88,7 @@ export const ReferencesPage = () => {
                   onClick={() => onNavigate(project._id!)}
                 />
               ))}
-            </VStack>
+            </SimpleGrid>
           </VStack>
         )
       }

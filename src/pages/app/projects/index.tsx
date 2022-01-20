@@ -1,10 +1,4 @@
-import NextLink from "next/link";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  SimpleGrid,
-} from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { Flex, Text, VStack } from "@chakra-ui/layout";
 import { HiOutlineChevronRight, HiOutlinePlus } from "react-icons/hi";
@@ -13,10 +7,11 @@ import { AppTemplate } from "../../../components/templates/AppTemplate";
 import { IconButton } from "@chakra-ui/button";
 import { handleNavigate } from "../../../utils/handleNavigate";
 import { api } from "../../../services/axios";
-import { useSession } from "../../../contexts/useSession";
 import { ProjectCard } from "../../../components/organisms/Projects/ProjectCard";
 import { useGetProjectsByUser } from "../../../hooks/useGetProjectsByUser";
 import { LoadingSpinner } from "../../../components/organisms/LoadingSpinner";
+import { BreadCrumb } from "../../../components/organisms/BreadCrumb";
+import { breadcrumbs } from "../../../constants/breadCrumb";
 
 export const ProjectsPage = () => {
   const projectType = "project";
@@ -55,27 +50,7 @@ export const ProjectsPage = () => {
             align="flex-start"
             w="full"
           >
-            <Flex
-              w="full"
-              justify="space-between"
-              h="5vh"
-              align="center"
-              color="gray.500"
-            >
-              <Breadcrumb separator={<HiOutlineChevronRight />}>
-                <BreadcrumbItem>
-                  <BreadcrumbLink as={NextLink} href="/app">
-                    App
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem>
-                  <BreadcrumbLink as={NextLink} href="/app/projects">
-                    Projetos
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </Breadcrumb>
-            </Flex>
+            <BreadCrumb items={breadcrumbs.projectsPageBreadCrumb} />
 
             <Flex
               w="full"
