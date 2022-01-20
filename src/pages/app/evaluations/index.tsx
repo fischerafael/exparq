@@ -1,4 +1,4 @@
-import { Flex, Text, VStack } from "@chakra-ui/layout";
+import { Flex, Text, VStack, SimpleGrid } from "@chakra-ui/layout";
 import { Header } from "../../../components/organisms/Header";
 import { AppTemplate } from "../../../components/templates/AppTemplate";
 import { ProjectEvaluationCard } from "./components/ProjectEvaluationCard";
@@ -42,7 +42,7 @@ export const EvaluationsPage = () => {
               </Text>
             </Flex>
 
-            <VStack w="full" spacing="8">
+            <SimpleGrid w="full" gap="8" columns={[1, 1, 1, 2]}>
               {projects.map((project) => (
                 <ProjectEvaluationCard
                   projectType="Referência"
@@ -54,7 +54,7 @@ export const EvaluationsPage = () => {
                   key={project._id}
                 />
               ))}
-            </VStack>
+            </SimpleGrid>
           </VStack>
         )
       }
