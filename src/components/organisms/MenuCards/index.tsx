@@ -1,4 +1,5 @@
 import { Button, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { onNavigate } from "../../../utils/onNavigate";
 
 const menus = [
   {
@@ -6,26 +7,33 @@ const menus = [
     title: "Referências",
     description:
       "Adicione referências de projetos parecidas com o que você irá projetar.",
+    url: "/app/references",
   },
   {
     number: "02",
     title: "Avaliação",
     description:
       "Avalie as referências de projeto. O UxArch vai aprender a pensar como seu usuário.",
+    url: "/app/evaluations",
   },
   {
     number: "03",
     title: "Projeto",
     description:
       "Crie alternativas de projeto e adicone-as ao UxArch. O UxArch vai prever a experiência do usuário",
+    url: "/app/projects",
   },
 ];
 
 export const MenuCards = () => {
   return (
-    <SimpleGrid w="full" gap="8" py="8" columns={[1, 1, 2]}>
+    <SimpleGrid w="full" gap="8" pb="8" columns={[1, 1, 2]}>
       {menus.map((menu) => (
-        <MenuCard key={menu.title} onClick={() => {}} menu={menu} />
+        <MenuCard
+          key={menu.title}
+          onClick={() => onNavigate(menu.url)}
+          menu={menu}
+        />
       ))}
     </SimpleGrid>
   );
@@ -39,10 +47,10 @@ interface CardProps {
 
 interface MenuCardProps {
   menu: CardProps;
-  onClick: (e: any) => void;
+  onClick?: (e: any) => void;
 }
 
-const MenuCard = ({ menu }: MenuCardProps) => {
+const MenuCard = ({ menu, onClick }: MenuCardProps) => {
   return (
     <SimpleGrid
       w="full"
@@ -52,9 +60,10 @@ const MenuCard = ({ menu }: MenuCardProps) => {
       _hover={{ shadow: "md" }}
       p="8"
       position="relative"
-      cursor="pointer"
       columns={1}
       alignItems="center"
+      cursor="pointer"
+      onClick={onClick && onClick}
     >
       <Text
         fontWeight="bold"
@@ -76,11 +85,6 @@ const MenuCard = ({ menu }: MenuCardProps) => {
         <Text fontSize="md" textAlign="start">
           {menu.description}
         </Text>
-      </VStack>
-      <VStack w="full" align="flex-end">
-        <Button variant="ghost" borderRadius="0" colorScheme="blue">
-          Acessar
-        </Button>
       </VStack>
     </SimpleGrid>
   );
