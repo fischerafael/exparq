@@ -25,16 +25,20 @@ const menus = [
   },
 ];
 
-export const MenuCards = () => {
+export const MenuCards = ({ isPublic }: { isPublic?: boolean }) => {
   return (
     <SimpleGrid w="full" gap="8" pb="8" columns={[1, 1, 2]}>
-      {menus.map((menu) => (
-        <MenuCard
-          key={menu.title}
-          onClick={() => onNavigate(menu.url)}
-          menu={menu}
-        />
-      ))}
+      {menus.map((menu) => {
+        if (isPublic) return <MenuCard key={menu.title} menu={menu} />;
+
+        return (
+          <MenuCard
+            key={menu.title}
+            onClick={() => onNavigate(menu.url)}
+            menu={menu}
+          />
+        );
+      })}
     </SimpleGrid>
   );
 };

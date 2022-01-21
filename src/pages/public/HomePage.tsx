@@ -20,8 +20,6 @@ export const HomePage = () => {
       });
   };
 
-  const { projects } = useGetProjectsByUser({});
-
   return (
     <Flex
       w="100vw"
@@ -31,13 +29,11 @@ export const HomePage = () => {
       color="gray.900"
     >
       <VStack w="full" maxW="container.md" bg="white" px="8">
-        <MenuCards />
-
-        <Flex h="15vh" align="center">
+        <Flex minH="15vh" h="full" align="center">
           <Image src="/logo-black.svg" alt="UXArch" />
         </Flex>
 
-        <VStack h="70vh" spacing="8" justify="center">
+        <VStack minH="50vh" h="full" spacing="8" justify="center">
           <Text fontSize="4xl" fontWeight="extrabold" lineHeight="1.15">
             Projete Experiências Arquitetônicas
           </Text>
@@ -58,6 +54,8 @@ export const HomePage = () => {
             Projetar usando Google
           </Button>
         </VStack>
+
+        <MenuCards isPublic={true} />
       </VStack>
     </Flex>
   );
