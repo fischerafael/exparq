@@ -30,11 +30,11 @@ export const HomePage = () => {
       flexDirection="column"
     >
       <VStack w="full" maxW="container.md" bg="white" px="8">
-        <Flex minH="10vh" h="full" align="center">
+        <Flex minH="15vh" h="full" align="center">
           <Image src="/logo-black.svg" alt="UXArch" />
         </Flex>
 
-        <VStack minH="70vh" h="full" spacing="8" justify="center">
+        <VStack minH="85vh" h="full" spacing="8" justify="center">
           <Text fontSize="4xl" fontWeight="extrabold" lineHeight="1.15">
             Projete Experiências Arquitetônicas
           </Text>
