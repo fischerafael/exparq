@@ -28,6 +28,7 @@ export const UsersSection = ({ sectionTitle, state, setState }: Props) => {
             quantity: +e.target.value,
           })
         }
+        helperText="Exemplo: Quantiade de pessoas presente na imagem que ilustra o projeto/obra"
       />
       <SelectInput
         label="Movimento"
@@ -39,6 +40,7 @@ export const UsersSection = ({ sectionTitle, state, setState }: Props) => {
             movement: +e.target.value,
           })
         }
+        helperText="Exemplo: Intensidade de movimento por parte dos usuários presentes na imagem que ilustra o projeto/obra"
       />
     </VStack>
   );

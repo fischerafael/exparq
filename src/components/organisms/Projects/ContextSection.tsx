@@ -29,9 +29,10 @@ export const ContextSection = ({ sectionTitle, state, setState }: Props) => {
             type: +e.target.value,
           })
         }
+        helperText="Contexto (Vizinhança) no qual o projeto está inserido"
       />
       <SelectInput
-        label="Nível de Interesse do Contexto"
+        label="Grau de Interesse do Contexto"
         options={options.landmark}
         value={state.isProjectLandmark}
         onChange={(e) =>
@@ -40,6 +41,7 @@ export const ContextSection = ({ sectionTitle, state, setState }: Props) => {
             isProjectLandmark: +e.target.value,
           })
         }
+        helperText="Exemplo: Existem atrações turísticas ou pontos de interesse na vizinhança imediata?"
       />
       <SelectInput
         label="Nível de Interesse do Projeto"
@@ -51,6 +53,7 @@ export const ContextSection = ({ sectionTitle, state, setState }: Props) => {
             isContextLandmark: +e.target.value,
           })
         }
+        helperText="Exemplo: O projeto se propõe a ser um ícone ou referência arquitetônica?"
       />
     </VStack>
   );
