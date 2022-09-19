@@ -21,6 +21,8 @@ export const AppPage = () => {
     projectType: projectType,
   });
 
+  console.log(projects);
+
   const isEvaluationDisabled = projects.length < 1 ? true : false;
   const isProjectDisabled = projects.length < 3 ? true : false;
 
