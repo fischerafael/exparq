@@ -8,6 +8,7 @@ import {
 import Cookie from "js-cookie";
 import Router from "next/router";
 import { handleGoogleLogIn } from "../../services/firebase";
+import { useRouter } from "next/router";
 
 interface ISessionUserData {
   displayName: string;
@@ -32,17 +33,21 @@ const SessionProvider = ({ children }: { children: ReactNode }) => {
     photoURL: "",
   });
 
+  const { asPath } = useRouter();
+
   useEffect(() => {
     const cookies = Cookie.get("@ux");
 
-    if (!cookies) {
+    if (!cookies && asPath.includes("app")) {
       Router.push("/");
       return;
     }
 
-    const parsedCookies = JSON.parse(cookies);
-    setSessionUserData(parsedCookies);
-    // Router.push("/app");
+    if (cookies) {
+      const parsedCookies = JSON.parse(cookies);
+      setSessionUserData(parsedCookies);
+      // Router.push("/app");
+    }
   }, []);
 
   const handleLogin = async () => {
